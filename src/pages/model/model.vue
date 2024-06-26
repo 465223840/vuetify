@@ -1,20 +1,17 @@
 <template>
   <div class="h-full" absolute>
     <VueFlow :data="elements" />
-
   </div>
 </template>
 
 <script setup>
-
 import VueFlow from './components/VueFlow.vue'
-const hidden = ref(false)
 
 const nodes = ref([
   {
-    id: '1', data: { label: '流程1', description: '这里是描述。。。', status: '全局启用' }, position: { x: 0, y: 50 }, type: 'input', sourcePosition: 'right',
+    id: '1', data: { label: '流程1', description: '这里是描述。。。', status: '全局启用' }, position: { x: -200, y: 50 }, type: 'input', sourcePosition: 'right',
   },
-  { id: '2', data: { label: '流程2', description: '这里是描述。。。', status: '全局启用' }, position: { x: 200, y: 10 }, type: 'custom', },
+  { id: '2', data: { label: '流程2', description: '这里是描述。。。', status: '全局启用' }, position: { x: 200, y: -110 }, type: 'custom', },
   { id: '3', data: { label: '流程3', description: '这里是描述。。。', status: '全局启用' }, position: { x: 200, y: 100 }, type: 'parent' },
   {
     id: '4', data: { label: '流程4', description: '这里是描述。。。', status: '全局启用', StartOrEnd: 'start' }, position: { x: 25, y: 75 }, type: 'child', targetPosition: 'left', extent: 'parent', parentNode: '3',
@@ -26,8 +23,8 @@ const nodes = ref([
     id: '5', data: { label: '流程5', description: '这里是描述。。。', status: '全局启用', StartOrEnd: 'end' }, position: { x: 25, y: 230 }, type: 'child', targetPosition: 'left', parentNode: '3'
   },
   {
-    id: '7', data: { label: 'toolbar always open', toolbarPosition: 'bottom', toolbarVisible: false }, type: 'menu',
-    position: { x: 100, y: 200 },
+    id: '7', data: { label: '点我', toolbarPosition: 'bottom', toolbarVisible: false }, type: 'menu',
+    position: { x: 100, y: 100 },
   },
 
 ])

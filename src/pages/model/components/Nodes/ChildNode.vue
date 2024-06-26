@@ -44,4 +44,13 @@ const sourceHandleStyleB = computed(() => ({ backgroundColor: props.data.color, 
 
 
 </template>
-<style scoped></style>
+<style scoped>
+.custom-node {
+  background: #fff;
+  padding: 6px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+
+}
+</style>

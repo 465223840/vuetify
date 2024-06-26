@@ -34,14 +34,46 @@
       <v-card :title="nodeInfo.label" :subtitle="nodeInfo.label" v-show="hidden" width="300"
         :text="nodeInfo.description">
         <v-divider></v-divider>
-        123123
+        <v-btn>123</v-btn>
       </v-card>
     </v-expand-transition>
   </Panel>
 </template>
 
 <script setup>
+import { Panel, useVueFlow } from '@vue-flow/core'
+const { toObject, addNodes, dimensions } = useVueFlow()
+const props = defineProps({
+  nodeInfo: {
+    type: Object,
+    default: () => ({})
+  },
+  dark: {
+    type: Boolean,
+    default: false
+  },
+  hidden: {
+    type: Boolean,
+    default: false
+  },
 
+})
+const emits = defineEmits(['update:dark'])
+
+const dark = computed(() => props.dark)
+const toggleClass = () => emits('update:dark', !dark.value)
+
+const logToObject = () => console.log(toObject())
+const onAdd = () => {
+  const id = Date.now()
+  const newNode = {
+    id: `random_node-${id}`,
+    label: `Node ${id}`,
+    position: { x: Math.random() * dimensions.value.width, y: Math.random() * dimensions.value.height },
+  }
+
+  addNodes([newNode])
+}
 </script>
 
 <style lang="scss" scoped></style>
