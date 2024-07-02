@@ -1,6 +1,6 @@
 <template>
   <div>
-    labbels
+    analysis
   </div>
 </template>
 

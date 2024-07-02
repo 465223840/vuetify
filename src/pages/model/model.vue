@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full" absolute>
+  <div class="h-full">
     <VueFlow :data="elements" />
   </div>
 </template>
