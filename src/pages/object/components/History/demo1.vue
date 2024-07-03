@@ -1,5 +1,5 @@
 <template>
-  <v-card :variant="variant" class="mx-auto" color="surface-variant" max-width="344"
+  <v-card  class="mx-auto" color="surface-variant" max-width="344"
     subtitle="Greyhound divisely hello coldly fonwderfully" title="Headline">
     <template v-slot:actions>
       <v-btn text="Button"></v-btn>

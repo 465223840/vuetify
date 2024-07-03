@@ -1,38 +1,119 @@
 <template>
-  <div class="bg-#F4F6F9 h-full">
-    <v-card title="乒乓小子" subtitle="一款App" rounded="0" />
+  <v-card class="mx-auto" max-width="500">
+    <v-toolbar color="transparent" flat>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-    <div class="p-8">
-      <div class="flex gap-4">
-        <v-card class="mx-auto" prepend-icon="mdi-map" subtitle="关联关系">
-          <template v-slot:title>
-            <span class="font-weight-black">Welcome to Vuetify</span>
+      <v-toolbar-title>Photo Info</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon="mdi-magnify" @click="searchField.focus()">
+      </v-btn>
+    </v-toolbar>
+
+    <v-container>
+      <v-row align="center" justify="start">
+        <v-col v-for="(selection, i) in selections" :key="selection.text" class="py-1 pe-0" cols="auto">
+          <v-chip :disabled="loading" closable @click:close="selected.splice(i, 1)">
+            <v-icon :icon="selection.icon" start></v-icon>
+
+            {{ selection.text }}
+          </v-chip>
+        </v-col>
+
+        <v-col v-if="!allSelected" cols="12">
+          <v-text-field ref="searchField" v-model="search" label="Search" hide-details single-line></v-text-field>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <v-divider v-if="!allSelected"></v-divider>
+
+    <v-list>
+      <template v-for="item in categories">
+        <v-list-item v-if="!selected.includes(item)" :key="item.text" :disabled="loading" @click="selected.push(item)">
+          <template v-slot:prepend>
+            <v-icon :disabled="loading" :icon="item.icon"></v-icon>
           </template>
-          <v-card-text class="bg-surface-light pt-4">
-            1
-          </v-card-text>
-        </v-card>
 
-        <v-card class="mx-auto" prepend-icon="mdi-phone" subtitle="基本信息">
-          <template v-slot:title>
-            <span class="font-weight-black">Welcome to Vuetify</span>
-          </template>
+          <v-list-item-title v-text="item.text"></v-list-item-title>
+        </v-list-item>
+      </template>
+    </v-list>
 
-          <v-card-text class="bg-surface-light pt-4">
-            2
-          </v-card-text>
-        </v-card>
+    <v-divider></v-divider>
 
-      </div>
+    <v-card-actions>
+      <v-spacer></v-spacer>
 
-    </div>
-  </div>
+      <v-btn :disabled="!selected.length" :loading="loading" color="purple" variant="text" @click="next">
+        Next
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 
 
 </template>
-
 <script setup>
+import { computed, ref, watch } from 'vue'
 
+const items = [
+  {
+    text: 'Nature',
+    icon: 'mdi-nature',
+  },
+  {
+    text: 'Nightlife',
+    icon: 'mdi-glass-wine',
+  },
+  {
+    text: 'November',
+    icon: 'mdi-calendar-range',
+  },
+  {
+    text: 'Portland',
+    icon: 'mdi-map-marker',
+  },
+  {
+    text: 'Biking',
+    icon: 'mdi-bike',
+  },
+]
+const searchField = ref()
+
+const loading = ref(false)
+const search = ref('')
+const selected = ref([])
+
+const allSelected = computed(() => {
+  return selected.value.length === items.length
+})
+const categories = computed(() => {
+  const _search = search.value.toLowerCase()
+  if (!_search) return items
+  return items.filter(item => {
+    const text = item.text.toLowerCase()
+    return text.indexOf(_search) > -1
+  })
+})
+const selections = computed(() => {
+  const selections = []
+  for (const selection of selected.value) {
+    selections.push(selection)
+  }
+  return selections
+})
+
+watch(selected, () => {
+  search.value = ''
+})
+
+function next() {
+  loading.value = true
+  setTimeout(() => {
+    search.value = ''
+    selected.value = []
+    loading.value = false
+  }, 2000)
+}
 </script>
-
-<style lang=" scss" scoped></style>
