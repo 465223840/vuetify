@@ -1,14 +1,13 @@
 <template>
   <v-navigation-drawer :rail="rail" permanent>
     <v-list>
-      <v-list-item prepend-avatar="@/assets/logo.png" title="FBI" @click.stop="rail = false">
+      <v-list-item prepend-avatar="@/assets/logo.png" title="开心马六" @click.stop="rail = false">
         <template v-slot:append>
           <v-btn icon="mdi-chevron-left" variant="text" @click.stop="rail = !rail" />
         </template>
       </v-list-item>
-      <v-divider></v-divider>
+      <v-divider />
     </v-list>
-
     <v-list density="compact" nav v-model="activated">
       <template v-for="(item, index) in items">
         <v-list-subheader v-if="item.type == 'subheader'">
@@ -37,7 +36,7 @@ const items = [
 
   { text: '对象分析', type: 'subheader' },
   { type: 'divider' },
-  { text: '对象查询', path: '/object/search', icon: 'mdi-account-search', iconColor: 'purple' },
+  { text: '画像查询', path: '/object/search', icon: 'mdi-account-search', iconColor: 'purple' },
   { text: '人群圈选', path: '/object/range', icon: 'mdi-account-group', iconColor: 'blue' },
   { text: '群体分析', path: '/object/analysis', icon: 'mdi-account-settings', iconColor: 'blue' },
 

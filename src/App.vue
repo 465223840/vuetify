@@ -4,10 +4,10 @@
       <Menu />
     </v-theme-provider>
     <v-main class="h-screen">
-      <router-view v-slot="{ Component, route }" transition="fade">
-        <transition name="slide-fade" mode="out-in">
+      <router-view v-slot="{ Component, route }">
+        <v-scroll-x-reverse-transition mode="out-in">
           <component :is="Component" :key="route.fullPath" />
-        </transition>
+        </v-scroll-x-reverse-transition>
       </router-view>
 
     </v-main>
@@ -17,24 +17,3 @@
 <script setup>
 //
 </script>
-
-
-<style>
-/*
-  进入和离开动画可以使用不同
-  持续时间和速度曲线。
-*/
-.slide-fade-enter-active {
-  transition: all 0.1s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-</style>
