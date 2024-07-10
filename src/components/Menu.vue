@@ -39,6 +39,8 @@ const items = [
   { text: '画像查询', path: '/object/search', icon: 'mdi-account-search', iconColor: 'purple' },
   { text: '人群圈选', path: '/object/range', icon: 'mdi-account-group', iconColor: 'blue' },
   { text: '群体分析', path: '/object/analysis', icon: 'mdi-account-settings', iconColor: 'blue' },
+  { text: '标签筛选', path: '/object/filter', icon: 'mdi-filter', iconColor: 'blue' },
+
 
   { text: '模型', type: 'subheader' },
   { type: 'divider' },
@@ -47,5 +49,6 @@ const items = [
   { text: '模型', path: '/model/model', icon: 'mdi-flag', iconColor: 'blue' },
 
   { text: '资源', type: 'subheader' },
+  { text: '网站', path: '/resource/website', icon: 'mdi-web', iconColor: 'blue' },
 ]
 </script>

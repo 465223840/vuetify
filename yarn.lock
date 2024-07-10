@@ -1838,6 +1838,14 @@ duplexer@^0.1.2:
   resolved "https://registry.npmmirror.com/duplexer/-/duplexer-0.1.2.tgz#3abe43aef3835f8ae077d136ddce0f276b0400e6"
   integrity sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==
 
+echarts@^5.5.1:
+  version "5.5.1"
+  resolved "https://registry.npmjs.org/echarts/-/echarts-5.5.1.tgz#8dc9c68d0c548934bedcb5f633db07ed1dd2101c"
+  integrity sha512-Fce8upazaAXUVUVsjgV6mBnGuqgO+JNDlcgF79Dksy4+wgGpQB2lmYoO4TSweFg/mZITdpGHomw/cNBJZj1icA==
+  dependencies:
+    tslib "2.3.0"
+    zrender "5.6.0"
+
 electron-to-chromium@^1.4.796:
   version "1.4.797"
   resolved "https://registry.npmmirror.com/electron-to-chromium/-/electron-to-chromium-1.4.797.tgz"
@@ -3542,6 +3550,11 @@ tsconfig-paths@^3.15.0:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
+tslib@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npmjs.org/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
+  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
+
 tslib@^2.3.1, tslib@^2.5.0, tslib@^2.5.3:
   version "2.6.3"
   resolved "https://registry.npmmirror.com/tslib/-/tslib-2.6.3.tgz#0438f810ad7a9edcde7a241c3d80db693c8cbfe0"
@@ -3901,3 +3914,10 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.npmmirror.com/yocto-queue/-/yocto-queue-0.1.0.tgz"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+zrender@5.6.0:
+  version "5.6.0"
+  resolved "https://registry.npmjs.org/zrender/-/zrender-5.6.0.tgz#01325b0bb38332dd5e87a8dbee7336cafc0f4a5b"
+  integrity sha512-uzgraf4njmmHAbEUxMJ8Oxg+P3fT04O+9p7gY+wJRVxo8Ge+KmYv0WJev945EH4wFuc4OY2NLXz46FZrWS9xJg==
+  dependencies:
+    tslib "2.3.0"

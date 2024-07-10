@@ -16,6 +16,7 @@
     "@vue-flow/minimap": "^1.5.0",
     "@vue-flow/node-toolbar": "^1.1.0",
     "core-js": "^3.34.0",
+    "echarts": "^5.5.1",
     "roboto-fontface": "*",
     "unocss": "^0.60.4",
     "vue": "^3.4.0",

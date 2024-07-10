@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-theme-provider theme="dark" with-background>
+    <!-- <v-theme-provider theme="dark" with-background>
       <Menu />
-    </v-theme-provider>
+    </v-theme-provider> -->
     <v-main class="h-screen">
       <router-view v-slot="{ Component, route }">
         <v-scroll-x-reverse-transition mode="out-in">
