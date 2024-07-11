@@ -58,6 +58,9 @@ export default defineConfig({
     },
     extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
   },
+  build: {
+    outDir: 'filter' // 设置打包后的目录名称为dist
+  },
   server: {
     host: true,
     port: 3000,

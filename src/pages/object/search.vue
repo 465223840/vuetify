@@ -10,12 +10,12 @@
       </v-row>
       <v-row justify="center" no-gutters>
         <v-col :cols="6">
-          <SearchBox  :loading="loading" @search="onClick"/>
+          <SearchBox :loading="loading" @search="onClick" />
         </v-col>
       </v-row>
       <v-row justify="center">
         <v-col :cols="5">
-          <History @click="onClick"/>
+          <History @click="onClick" />
         </v-col>
       </v-row>
     </v-container>
@@ -29,10 +29,9 @@ import History from './components/History.vue'
 const router = useRouter()
 const loading = ref(false)
 
-const onClick = (type,keywords) => {
+const onClick = (type, keywords) => {
   loading.value = true
   setTimeout(() => {
-    console.log(type,keywords)
     router.push(`/object/SearchResults?type=${type}&keywords=${keywords}`)
     loading.value = false
   }, 200);

@@ -43,20 +43,23 @@ const initChart = () => {
       }
     },
     grid: {
-      // top: '5%'
+      top: '5%',
+      left: '15%'
     },
-    yAxis: {},
+    yAxis: {
+      type: "value",
+      axisLabel: {
+        formatter: function (value, index) {
+          return value >= 10000 ? parseInt(value / 10000) + "万" : value;
+        },
+      },
+    },
     series: [
       {
         name: '属性',
         type: 'bar',
         barWidth: '50%',
-        label: {
-          show: true,
-          position: 'top',
-          color: '#333',
-          fontFamily: 'Arial, sans-serif',
-        },
+
         data: props.data.map(item => item.count),
       },
     ],
