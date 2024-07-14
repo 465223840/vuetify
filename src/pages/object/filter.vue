@@ -16,8 +16,7 @@
     <v-divider />
     <v-card style='height:calc(100% - 80px)'>
       <div class="flex h-full">
-        <v-list density="compact" nav :lines="false" class="w-51 h-full position-absolute"
-          style="background-color: #f5f5f5;">
+        <v-list nav :lines="false" class="w-60 h-full position-absolute" style="background-color: #f5f5f5;">
           <v-list-item v-for="(item, index) in items" :key="index" border class="bg-white"
             style="border-color: #62ccff;">
             <template #append>
@@ -27,31 +26,35 @@
             <v-list-item-title v-text="item.title" />
           </v-list-item>
         </v-list>
-        <v-card class="w-full ml-51 h-full overflow-y-auto" density="compact">
+
+        <v-card class="w-full ml-60 h-full overflow-y-auto" density="compact">
           <template #title>
             <div class="color-gray-5 text-lg h-12 line-height-12">
-              <Loading :loading="loading">
-                {{ str }}
-              </Loading>
+              <!-- <Loading :loading="loading"> -->
+              {{ str }}
+
             </div>
           </template>
           <v-divider />
-          <v-container class='h-full'>
-            <v-row justify="center">
-              <v-col :cols="4" v-for="(card, key) of cards">
-                <v-card class="h-90">
-                  <v-card-title>
-                    {{ key }}
-                  </v-card-title>
-                  <v-divider />
-                  <v-list>
-                    <BarChart :data="card" @click="onSearch" />
-                  </v-list>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-container>
+          <Loading :loading="loading">
+            <v-container class='h-full'>
+              <v-row justify="center">
+                <v-col :cols="4" v-for="(card, key) of cards">
+                  <v-card class="h-90">
+                    <v-card-title>
+                      {{ key }}
+                    </v-card-title>
+                    <v-divider />
+                    <v-list>
+                      <BarChart :data="card" @click="onSearch" />
+                    </v-list>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </Loading>
         </v-card>
+
       </div>
     </v-card>
   </v-container>
