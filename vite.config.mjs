@@ -6,11 +6,11 @@ import Layouts from "vite-plugin-vue-layouts";
 import Vue from "@vitejs/plugin-vue";
 import VueRouter from "unplugin-vue-router/vite";
 import Vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
-import Unocss from "unocss/vite";
 // Utilities
 import { defineConfig } from "vite";
 import { fileURLToPath, URL } from "node:url";
 import { VueRouterAutoImports } from "unplugin-vue-router";
+import tailwindcss from 'tailwindcss'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -20,7 +20,6 @@ export default defineConfig({
       exclude: ['**/components'],
 
     }),
-    Unocss(),
     Layouts(),
     Vue({
       template: { transformAssetUrls },
@@ -57,6 +56,11 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
     extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
+  },
+  css: {
+    postcss: {
+      plugins: [tailwindcss],
+    },
   },
   build: {
     outDir: 'filter' // 设置打包后的目录名称为dist

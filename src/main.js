@@ -6,7 +6,7 @@
 
 // Plugins
 import { registerPlugins } from "@/plugins";
-import "uno.css";
+import "./styles/tailwind.css";
 // Components
 import App from "./App.vue";
 
