@@ -1,76 +1,110 @@
 <template>
-  <v-container class="fill-height">
-    <v-responsive class="align-centerfill-height mx-auto" max-width="900">
-      <v-img class="mb-4" height="150" src="@/assets/logo.png" />
-      <div class="text-center">
-        <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>
-        <h1 class="text-h2 font-weight-bold">Vuetify</h1>
+  <v-container class='h-full'>
+    <v-row justify="center">
+      <v-col :cols="2">
+        <TimePicker v-model="date" label="日期" />
+      </v-col>
+      <v-col :cols="6">
+        <v-text-field label="请输入查询对象" v-model="keywords" clearable single-line color="primary" variant="outlined"
+          @keyup.enter="() => onSearch()">
+          <template #append-inner>
+            <v-btn density="comfortable" icon="mdi-magnify" @click.stop="() => onSearch()" />
+          </template>
+        </v-text-field>
+      </v-col>
+    </v-row>
+    <v-divider />
+    <v-card style='height:calc(100% - 80px)'>
+      <div class="flex h-full">
+        <v-list nav :lines="false" class="w-60 h-full position-absolute " bg-color="#f5f5f5">
+          <v-list-item v-for="(item, index) in items" :key="index" border class="bg-white"
+            style="border-color: #62ccff;">
+            <template #append>
+              {{ item.count }}
+              <v-btn @click="() => onRemove(index)" color="red" icon="mdi-close" variant="text" density="compact" />
+            </template>
+            <v-list-item-title v-text="item.title" />
+          </v-list-item>
+        </v-list>
+        <v-card class="w-full ml-60 h-full overflow-y-auto" density="compact">
+          <template #title>
+            <div class="color-gray-5 text-lg h-12 line-height-12">
+              {{ str }}
+            </div>
+          </template>
+          <v-divider />
+          <Loading :loading="loading">
+            <v-container class='h-full'>
+              <v-row justify="center">
+                <v-col :cols="4" v-for="(card, key) of cards">
+                  <v-card class="h-90">
+                    <v-card-title>
+                      {{ key }}
+                    </v-card-title>
+                    <v-divider />
+                    <v-list>
+                      <BarChart :data="card" @click="onSearch" />
+                    </v-list>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </Loading>
+        </v-card>
       </div>
-      <div class="py-4" />
-      <v-row>
-        <v-col cols="12">
-          <v-card class="py-4" color="surface-variant"
-            image="https://cdn.vuetifyjs.com/docs/images/one/create/feature.png"
-            prepend-icon="mdi-rocket-launch-outline" rounded="lg" variant="outlined">
-            <template #image>
-              <v-img position="top right" />
-            </template>
-
-            <template #title>
-              <h2 class="text-h5 font-weight-bold">Get started</h2>
-            </template>
-
-            <template #subtitle>
-              <div class="text-subtitle-1">
-                Replace this page by removing <v-kbd>{{ `
-                  <HelloWorld />` }}
-                </v-kbd> in <v-kbd>pages/index.vue</v-kbd>.
-              </div>
-            </template>
-
-            <v-overlay opacity=".12" scrim="primary" contained model-value persistent />
-          </v-card>
-        </v-col>
-
-        <v-col cols="6">
-          <v-card append-icon="mdi-open-in-new" class="py-4" color="surface-variant" href="https://vuetifyjs.com/"
-            prepend-icon="mdi-text-box-outline" rel="noopener noreferrer" rounded="lg"
-            subtitle="Learn about all things Vuetify in our documentation." target="_blank" title="Documentation"
-            variant="text">
-            <v-overlay opacity=".06" scrim="primary" contained model-value persistent />
-          </v-card>
-        </v-col>
-
-        <v-col cols="6">
-          <v-card append-icon="mdi-open-in-new" class="py-4" color="surface-variant"
-            href="https://vuetifyjs.com/introduction/why-vuetify/#feature-guides" prepend-icon="mdi-star-circle-outline"
-            rel="noopener noreferrer" rounded="lg" subtitle="Explore available framework Features." target="_blank"
-            title="Features" variant="text">
-            <v-overlay opacity=".06" scrim="primary" contained model-value persistent />
-          </v-card>
-        </v-col>
-
-        <v-col cols="6">
-          <v-card append-icon="mdi-open-in-new" class="py-4" color="surface-variant"
-            href="https://vuetifyjs.com/components/all" prepend-icon="mdi-widgets-outline" rel="noopener noreferrer"
-            rounded="lg" subtitle="Discover components in the API Explorer." target="_blank" title="Components"
-            variant="text">
-            <v-overlay opacity=".06" scrim="primary" contained model-value persistent />
-          </v-card>
-        </v-col>
-
-        <v-col cols="6">
-          <v-card append-icon="mdi-open-in-new" class="py-4" color="surface-variant"
-            href="https://discord.vuetifyjs.com" prepend-icon="mdi-account-group-outline" rel="noopener noreferrer"
-            rounded="lg" subtitle="Connect with Vuetify developers." target="_blank" title="Community" variant="text">
-            <v-overlay opacity=".06" scrim="primary" contained model-value persistent />
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-responsive>
+    </v-card>
   </v-container>
 </template>
 
 <script setup>
-//
+// import TimePicker from './components/TimePicker.vue'
+import dayjs from 'dayjs';
+
+// 获取当天的年月日 YYYY-MM-DD 格式
+const today = dayjs().format('YYYY-MM-DD');
+
+const date = ref(today)
+const keywords = ref('')
+const loading = ref(false)
+const str = ref(`总人数: 0 人，涉及行业 0 个, 职业角色 0 种, 异常标签 0 人`)
+
+const cards = ref([])
+const items = reactive([])
+
+const getData = async (data) => {
+  try {
+    loading.value = true
+    const res = await fetch('/api/get_tag_count_all', {
+      method: 'POST', // 指定请求方法
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ "tag_code": data, "create_time": date.value })
+    })
+    return res.json()
+  } catch (error) {
+    return null
+  } finally {
+    loading.value = false
+    keywords.value = ''
+  }
+}
+
+const onSearch = async (text) => {
+  const attr = keywords.value || text
+  const target = items.find((item) => attr === item.title)
+  if (!target) {
+    let params = [...items.map(item => item.title)].join(',')
+
+    if (attr) {
+      params += ',' + attr
+      items.push({ title: attr, count: 0 })
+    }
+    cards.value = await getData(params)
+  }
+}
+
+const onRemove = async (index) => {
+  items.splice(index, 1)
+  const data = [...items.map(item => item.title)].join(',')
+  cards.value = await getData(data)
+}
 </script>

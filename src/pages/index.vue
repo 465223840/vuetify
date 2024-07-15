@@ -1,9 +1,8 @@
 <template>
-  <Filter />
-  <!-- 123 -->
+  <Dashboard />
 </template>
 
 <script setup>
-import Filter from './object/filter.vue'
+import Dashboard from './dashboard/index.vue'
 //
 </script>
