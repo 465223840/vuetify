@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-navigation-drawer :rail="rail" permanent width="560">
+  <div class="h-full">
+    <!-- <v-navigation-drawer permanent width="360">
       <v-card density="compact" class="h-full">
         <div class="absolute w-full p-1 bg-[#FAF9FB]  border-y-2 ">
           <v-btn density="compact" variant="plain" prepend-icon="mdi-page-first">收起</v-btn>
@@ -13,25 +13,23 @@
             </span>
             人
           </div>
-
           <v-text-field variant="outlined" density="compact" prepend-inner-icon="mdi-magnify" class="bg-[#F2F5F6] "
             placeholder="请输入标签关键词或任意描述" hide-details>
           </v-text-field>
-
-          <!-- <LabelTree v-model:items="items" /> -->
           <LabelTree :items="treeItems" @update:items="updateTreeItems" />
         </div>
       </v-card>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
     <!-- <v-sheet :elevation="16" :height="200" :width="200" border rounded></v-sheet> -->
-    123
+    <div class="h-full p-2 bg-#F3F5F6">
+      <CardList />
+    </div>
   </div>
 </template>
 
-
 <script setup>
 import LabelTree from './components/Filter/LabelTree.vue'
-const rail = ref(false)
+import CardList from './components/Filter/CardList.vue'
 
 const onRemove = (index) => {
   console.log(index)

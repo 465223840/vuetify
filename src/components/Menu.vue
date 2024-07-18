@@ -22,6 +22,15 @@
         </v-list-item>
       </template>
     </v-list>
+    <template v-slot:append>
+      <div class="bg-red pa-2">
+        <v-btn block>
+          userinfo
+        </v-btn>
+      </div>
+    </template>
+
+
   </v-navigation-drawer>
 </template>
 

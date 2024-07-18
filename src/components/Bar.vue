@@ -6,19 +6,15 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import * as echarts from 'echarts';
+import bar_options from './options';
 
 const props = defineProps({
   data: {
     type: Array,
     required: true,
-  },
-  options: {
-    type: Object,
-    default: true,
-  },
+  }
 });
 const emit = defineEmits(['click'])
-
 const chart = ref(null);
 let myChart = null;
 
