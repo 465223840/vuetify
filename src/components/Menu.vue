@@ -34,7 +34,7 @@ const items = [
 
   { text: '首页', path: '/', icon: 'mdi-view-dashboard', iconColor: 'green' },
 
-  { text: '对象分析', type: 'subheader' },
+  { text: '对象', type: 'subheader' },
   { type: 'divider' },
   { text: '画像查询', path: '/object/search', icon: 'mdi-account-search', iconColor: 'purple' },
   { text: '人群圈选', path: '/object/range', icon: 'mdi-account-group', iconColor: 'blue' },
