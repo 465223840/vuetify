@@ -56,7 +56,7 @@ watch(() => props.text, (newVal) => {
 
 <style lang="scss" scoped>
 .tag {
-  width: auto;
+  max-height: 24px;
   color: #333333;
 
   padding: 2px 8px;

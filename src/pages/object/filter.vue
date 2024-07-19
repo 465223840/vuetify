@@ -29,7 +29,10 @@ const cache_tags = ref([
   { text: '女士', count: 100 },
   { text: '学生', count: 200 },
 ])
-const calc_tags = ref([])
+const calc_tags = ref([
+  { text: '女士', count: 100 },
+  { text: '学生', count: 200 },
+])
 const hide_tags = ref([
   { text: '分析维度1' },
   { text: '分析维度2' },

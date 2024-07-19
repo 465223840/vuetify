@@ -6,7 +6,7 @@
     <input :type="type" :placeholder="placeholder" v-model="modelValue"
       @input="$emit('update:modelValue', modelValue)" />
     <span v-if="suffixIcon" class="icon">
-      <v-icon :icon="suffixIcon" />
+      <v-btn :icon="suffixIcon" variant="text" density="compact" />
     </span>
   </div>
 </template>
@@ -37,7 +37,7 @@ const modelValue = ref(props.modelValue);
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #f4f4f4;
+  background-color: #fff;
   font-weight: 500;
 }
 

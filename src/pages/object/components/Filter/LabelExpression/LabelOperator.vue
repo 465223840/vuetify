@@ -1,14 +1,46 @@
 <template>
-  <div class="flex gap-2 ">
-    <h-tag :removable="false">&</h-tag>
-    <h-tag :removable="false">|</h-tag>
-    <h-tag :removable="false">!</h-tag>
-    <h-tag :removable="false">()</h-tag>
-  </div>
+  <draggable class="dragArea list-group" :list="operatorTags" :group="{ name: 'tags', pull: 'clone', put: false }"
+    @change="log">
+    <template #item="{ element, index }">
+      <transition name="fade">
+        <h-tag :count="element.count" :key="index">
+          {{ element.text }}
+        </h-tag>
+      </transition>
+    </template>
+  </draggable>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import draggable from 'vuedraggable';
 
+const operatorTags = ref([
+  { text: '&' },
+  { text: '|' },
+  { text: '!' },
+  { text: '()' },
+]);
+
+const log = (evt) => {
+  console.log(evt);
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.dragArea {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
