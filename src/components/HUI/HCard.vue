@@ -55,7 +55,7 @@ const selectOption = (option) => {
     padding-inline: 24px 12px;
     height: 42px;
     line-height: 42px;
-    font-size: 20px;
+    font-size: 16px;
     background-color: #F3F5F6;
     border-bottom: 1px solid #D4DADE;
   }

@@ -6,24 +6,17 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import * as echarts from 'echarts';
-import bar_options from './options/bar';
+import bar_options from './options/pie';
 
 const props = defineProps({
   seriesData: {
     type: Array,
     required: true,
   },
-  xAxisData: {
-    type: Array,
-    required: true,
-  },
+
   options: {
     type: Object,
     default: bar_options,
-  },
-  type: {
-    type: String,
-    default: 'bar'
   }
 });
 
@@ -34,9 +27,7 @@ let myChart = null;
 
 const initChart = () => {
   myChart = echarts.init(chart.value);
-  options.value.xAxis.data = props.xAxisData
   options.value.series[0].data = props.seriesData
-  options.value.series[0].type = props.type
 
   myChart.setOption(options.value);
   myChart.off('click');

@@ -1,53 +1,30 @@
 <template>
   <div class="h-full p-4 bg-#F3F5F6">
-
-    <div class=" border mb-2 bg-white p-4">
-      <div class=" border bg-[#F5FAFA]">
-        <div class="flex gap-2 p-2 border-b-2">
-          <h-input prefixIcon="mdi-magnify" suffixIcon="mdi-magnify" placeholder="请输入关键词..." class="w-120" />
-          <div class="flex gap-2 items-center">
-            <h-tag :count="tag.count" v-for="tag in cache_tags">
-              {{ tag.text }}
-            </h-tag>
-          </div>
-          <h-select class="ml-auto"></h-select>
-        </div>
-        <div class="p-2 min-h-10 relative">
-          <div class=" flex flex-wrap mr-20">
-            <Operator />
-            |
-          </div>
-          <div class="absolute right-2 top-2">
-            <v-btn size="small">清空</v-btn>
-          </div>
-        </div>
-      </div>
+    <div class="border mb-2 bg-white p-4">
+      <LabelExpression :searchText="searchText" :cacheTags="cache_tags" :calcTags="calc_tags" />
     </div>
-    <div class="mb-2">
+    <div class="mb-2 ">
       <div class="flex justify-between">
-        <UserCount count="200" />
-        <div class="flex gap-2">
-          <div v-for="tag in hide_tags" class="text-sm bg-[#D2DAEE]  px-3 py-1 rounded-sm">
-            <span class="mr-4"> {{ tag.text }}</span>
-            <a href="#">
-              <v-icon icon="mdi-arrow-top-right-bottom-left" class="text-sm "></v-icon>
-            </a>
-          </div>
-          <!-- <h-tag v-for="tag in hide_tags" :border="false" color="#D2DAEE">{{ tag.text }}</h-tag> -->
-        </div>
+        <UserCount :count="200" />
+        <Operation class="float-right" />
       </div>
+      <HideTags :data="hide_tags" />
     </div>
     <div class="bg-#F3F5F6">
-      <CardList />
+      <CardList :list="list" />
     </div>
   </div>
+
 </template>
 
 <script setup>
 import CardList from './components/Filter/CardList.vue'
 import UserCount from './components/Filter/UserCount.vue'
-import Operator from './components/Filter/Operator.vue'
+import Operation from './components/Filter/Operation.vue'
+import HideTags from './components/Filter/HideTags.vue'
+import LabelExpression from './components/Filter/LabelExpression/index.vue'
 
+const searchText = ref('')
 const cache_tags = ref([
   { text: '女士', count: 100 },
   { text: '学生', count: 200 },
@@ -57,92 +34,30 @@ const hide_tags = ref([
   { text: '分析维度1' },
   { text: '分析维度2' },
 ])
-const onRemove = (index) => {
-  console.log(index)
-}
 
-const updateTreeItems = (newItems) => {
-  treeItems.value = newItems;
-};
-
-const treeItems = ref([
+const list = [
   {
-    id: 1,
-    title: 'Vuetify Human Resources',
-    type: '1',
-    children: [
-      {
-        id: 2,
-        title: 'Core team',
-        type: '1',
-        children: [
-          {
-            id: 201,
-            type: '2',
-            title: 'John',
-          },
-          {
-            id: 202,
-            type: '2',
-            title: 'Kael',
-          },
-          {
-            id: 203,
-            type: '2',
-            title: 'Nekosaur',
-          },
-          {
-            id: 204,
-            type: '2',
-            title: 'Jacek',
-          },
-          {
-            id: 205,
-            type: '3',
-            title: 'Andrew',
-          },
-        ],
-      },
-      {
-        id: 3,
-        type: '1',
-        title: 'Administrators',
-        children: [
-          {
-            id: 301,
-            type: '',
-            title: 'Mike',
-          },
-          {
-            id: 302,
-            type: '3',
-            title: 'Hunt',
-          },
-        ],
-      },
-      {
-        id: 4,
-        type: '1',
-        title: 'Contributors',
-        children: [
-          {
-            id: 401,
-            type: '1',
-            title: 'Phlow',
-          },
-          {
-            id: 402,
-            type: '1',
-            title: 'Brandon',
-          },
-          {
-            id: 403,
-            type: '1',
-            title: 'Sean',
-          },
-        ],
-      },
-    ],
+    title: '兵役情况',
+    seriesData: [1, 2, 3],
+    xAxisData: ['a', 'b', 'c']
   },
-])
+  {
+    title: '兵役情况',
+    type: 'pie',
+    seriesData: [
+      { value: 1048, name: 'Search Engine' },
+      { value: 735, name: 'Direct' },
+      { value: 580, name: 'Email' },
+      { value: 484, name: 'Union Ads' },
+      { value: 300, name: 'Video Ads' }
+    ],
+
+  },
+  {
+    title: '兵役情况',
+    seriesData: [11, 12, 13],
+    xAxisData: ['a', 'b', 'c']
+  }
+]
+
 </script>
