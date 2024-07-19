@@ -34,8 +34,8 @@ let myChart = null;
 
 const initChart = () => {
   myChart = echarts.init(chart.value);
-  options.value.xAxis.data = props.data
-  options.value.series[0].data = props.xAxisData
+  options.value.xAxis.data = props.xAxisData
+  options.value.series[0].data = props.data
   options.value.series[0].type = props.type
 
   myChart.setOption(options.value);

@@ -1,62 +1,74 @@
 <template>
-  <div class="h-full p-4 bg-#F3F5F6">
-
+  <div class="h-full p-2 bg-#F3F5F6">
+    <!-- <v-navigation-drawer permanent width="360">
+      <v-card density="compact" class="h-full">
+        <div class="absolute w-full p-1 bg-[#FAF9FB]  border-y-2 ">
+          <v-btn density="compact" variant="plain" prepend-icon="mdi-page-first">收起</v-btn>
+        </div>
+        <div class="p-2 mt-8">
+          <div class="p-1 text-right text-xs">
+            用户数
+            <span class="text-[#2552BD] text-sm font-bold">
+              9999
+            </span>
+            人
+          </div>
+          <v-text-field variant="outlined" density="compact" prepend-inner-icon="mdi-magnify" class="bg-[#F2F5F6] "
+            placeholder="请输入标签关键词或任意描述" hide-details>
+          </v-text-field>
+          <LabelTree :items="treeItems" @update:items="updateTreeItems" />
+        </div>
+      </v-card>
+    </v-navigation-drawer> -->
+    <!-- <v-sheet :elevation="16" :height="200" :width="200" border rounded></v-sheet> -->
     <div class=" border mb-2 bg-white p-4">
       <div class=" border bg-[#F5FAFA]">
         <div class="flex gap-2 p-2 border-b-2">
           <h-input prefixIcon="mdi-magnify" suffixIcon="mdi-magnify" placeholder="请输入关键词..." class="w-120" />
           <div class="flex gap-2 items-center">
-            <h-tag :count="tag.count" v-for="tag in cache_tags">
-              {{ tag.text }}
-            </h-tag>
+            <h-tag text="text" count="2">女士</h-tag>
+            <h-tag text="text" count="3">女士</h-tag>
           </div>
           <h-select class="ml-auto"></h-select>
         </div>
-        <div class="p-2 min-h-10 relative">
-          <div class=" flex flex-wrap mr-20">
-            <Operator />
-            |
+        <v-divider />
+
+
+        <div class="p-2 min-h-10 flex">
+          <div class="flex gap-2 ">
+            <h-tag :removable="false">&</h-tag>
+            <h-tag :removable="false">|</h-tag>
+            <h-tag :removable="false">!</h-tag>
+            <h-tag :removable="false">()</h-tag>
           </div>
-          <div class="absolute right-2 top-2">
-            <v-btn size="small">清空</v-btn>
+          <v-divider class="border-opacity-100" color="error" vertical></v-divider>
+
+          <div class="ml-auto">
+            <v-btn size="small" density="compact">清空</v-btn>
           </div>
         </div>
       </div>
     </div>
-    <div class="mb-2">
-      <div class="flex justify-between">
-        <UserCount count="200" />
-        <div class="flex gap-2">
-          <div v-for="tag in hide_tags" class="text-sm bg-[#D2DAEE]  px-3 py-1 rounded-sm">
-            <span class="mr-4"> {{ tag.text }}</span>
-            <a href="#">
-              <v-icon icon="mdi-arrow-top-right-bottom-left" class="text-sm "></v-icon>
-            </a>
-          </div>
-          <!-- <h-tag v-for="tag in hide_tags" :border="false" color="#D2DAEE">{{ tag.text }}</h-tag> -->
-        </div>
+    <div>
+      <div class="p-1 text-xs">
+        用户数
+        <span class="text-[#2552BD] text-sm font-bold">
+          9999
+        </span>
+        人
       </div>
+      <h-tag>123</h-tag>
     </div>
-    <div class="bg-#F3F5F6">
+    <div class="h-full bg-#F3F5F6">
       <CardList />
     </div>
   </div>
 </template>
 
 <script setup>
+import LabelTree from './components/Filter/LabelTree.vue'
 import CardList from './components/Filter/CardList.vue'
-import UserCount from './components/Filter/UserCount.vue'
-import Operator from './components/Filter/Operator.vue'
 
-const cache_tags = ref([
-  { text: '女士', count: 100 },
-  { text: '学生', count: 200 },
-])
-const calc_tags = ref([])
-const hide_tags = ref([
-  { text: '分析维度1' },
-  { text: '分析维度2' },
-])
 const onRemove = (index) => {
   console.log(index)
 }

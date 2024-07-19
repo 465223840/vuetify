@@ -16,19 +16,22 @@ export default {
 
   },
   grid: {
-    top: '10%',
-    left: '5%',
-    bottom:'10%'
+    top: '15%',
+    left: '15%',
+    bottom:'15%'
   },
   yAxis: {
-    type: "value",
+
   },
   series: [
     {
       name: '属性',
       type: 'bar',
-      barWidth: '50%',
+      barWidth: '15%',
       data: [],
+      itemStyle: {
+        color: '#8DA6DE'
+      }
     },
   ],
 };

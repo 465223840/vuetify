@@ -15,30 +15,18 @@ import BarChart from '@/components/EChart/Bar.vue';
 const list = [
   {
     title: '兵役情况',
-    data: [
-      { name: '1', value: 100 },
-      { name: '2', value: 200 },
-      { name: '3', value: 300 },
-    ],
-    xAxisData: ['1', '2', '3']
+    data: [1, 2, 3],
+    xAxisData: ['a', 'b', 'c']
   },
   {
     title: '兵役情况',
-    data: [
-      { name: '1', value: 100 },
-      { name: '2', value: 200 },
-      { name: '3', value: 300 },
-    ],
-    xAxisData: ['1', '2', '3']
+    data: [1422, 132, 323],
+    xAxisData: ['a', 'b', 'c']
   },
   {
     title: '兵役情况',
-    data: [
-      { name: '1', value: 100 },
-      { name: '2', value: 200 },
-      { name: '3', value: 300 },
-    ],
-    xAxisData: ['1', '2', '3']
+    data: [11, 12, 13],
+    xAxisData: ['a', 'b', 'c']
   }
 ]
 

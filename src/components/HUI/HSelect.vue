@@ -34,24 +34,25 @@ const selectOption = (option) => {
 
 <style lang="scss" scoped>
 .dropdown {
+  height: 100%;
   position: relative;
   display: inline-block;
   font-size: 14px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 3px;
 
   .label {
     font-size: 12px;
   }
 
   button {
-    padding: 2px;
+    padding: 4px;
     background-color: #F0EFF1;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 120px;
-    height: 30px;
+    min-width: 100px;
+    height: 26px;
     border-radius: 3px;
 
     &:hover {
@@ -88,7 +89,7 @@ const selectOption = (option) => {
     height: 32px;
     line-height: 32px;
     text-align: center;
-    
+
     cursor: pointer;
 
     &:hover {
