@@ -1,6 +1,6 @@
 <template>
   <draggable class="dragArea list-group" :list="operatorTags" :group="{ name: 'tags', pull: 'clone', put: false }"
-    @change="log">
+    @change="log" itemKey="text">
     <template #item="{ element, index }">
       <transition name="fade">
         <h-tag :count="element.count" :key="index">

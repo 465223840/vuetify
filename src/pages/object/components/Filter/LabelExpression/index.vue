@@ -4,7 +4,7 @@
       <h-input prefixIcon="mdi-magnify" suffixIcon="mdi-magnify" :value="searchText" placeholder="请输入关键词..."
         class="w-120" @input="updateSearchText($event)" />
       <div class="flex gap-2 items-center">
-        <draggable class="dragArea list-group" :list="cacheTags" group="tags" @change="log">
+        <draggable class="dragArea list-group" :list="cacheTags" group="tags" @change="log" itemKey="text">
           <template #item="{ element, index }">
             <transition name="fade">
               <h-tag :count="element.count" :key="index">
@@ -14,14 +14,14 @@
           </template>
         </draggable>
       </div>
-      <h-select class="ml-auto"></h-select>
+      <!-- <h-select class="ml-auto"></h-select> -->
     </div>
     <div class="p-2 min-h-10 relative">
       <div class="flex flex-wrap mr-20">
         <LabelOperator />
         <div class="mx-4">|</div>
         <div class="flex gap-2 items-center">
-          <draggable class="dragArea list-group" :list="calcTags" group="tags" @change="log">
+          <draggable class="dragArea list-group" :list="calcTags" group="tags" @change="log" itemKey="text">
             <template #item="{ element, index }">
               <transition name="fade">
                 <h-tag :count="element.count" :key="index">

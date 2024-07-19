@@ -2,13 +2,13 @@
   <div class="dropdown">
     <button @click="toggleDropdown">
       <v-icon icon="mdi-history" />
-      <span class="label"> {{ selectedOption }}</span>
+      <span class="label"> {{ display }}</span>
       <span class="icon" :class="isOpen ? 'open' : 'close'">&#9662;</span>
     </button>
     <transition name="dropdown">
       <ul v-if="isOpen" class="dropdown-menu" v-click-outside="() => isOpen = false">
-        <li v-for="option in options" :key="option" @click="selectOption(option)">
-          {{ option }}
+        <li v-for="option in options" :key="option" @click="selectOption(option.value)">
+          {{ option.label }}
         </li>
       </ul>
     </transition>
@@ -18,8 +18,31 @@
 <script setup>
 import { ref } from 'vue';
 
-const options = ref(['Option 1', 'Option 2', 'Option 3']);
-const selectedOption = ref('Select');
+const props = defineProps(
+  {
+    options: {
+      type: Array,
+      required: true,
+      default: []
+    },
+    value: {
+      type: String,
+      required: true
+    }
+  }
+)
+const emit = defineEmits(['update:value'])
+
+const display = computed(() => {
+  const val = props.options.find(option => option.value === props.value)?.label || '';
+  console.log(val)
+  return val
+})
+
+// const selected = ref(props.value)
+
+// console.log(props.value)
+
 const isOpen = ref(false);
 
 const toggleDropdown = () => {
@@ -27,7 +50,9 @@ const toggleDropdown = () => {
 };
 
 const selectOption = (option) => {
-  selectedOption.value = option;
+  emit('update:value', option);
+
+  console.log(2)
   isOpen.value = false;
 };
 </script>
