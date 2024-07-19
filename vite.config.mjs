@@ -11,6 +11,7 @@ import { defineConfig } from "vite";
 import { fileURLToPath, URL } from "node:url";
 import { VueRouterAutoImports } from "unplugin-vue-router";
 import tailwindcss from 'tailwindcss'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -31,7 +32,9 @@ export default defineConfig({
         configFile: "src/styles/settings.scss",
       },
     }),
-    Components(),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
     Fonts({
       google: {
         families: [
@@ -43,7 +46,12 @@ export default defineConfig({
       },
     }),
     AutoImport({
-      imports: ["vue", "vue-router", VueRouterAutoImports],
+      resolvers: [ElementPlusResolver()],
+      imports: [
+        "vue",
+        "vue-router",
+        VueRouterAutoImports,
+      ],
       eslintrc: {
         enabled: true,
       },

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center align-center">
+  <div class="flex justify-center align-center search-page-wrapper">
     <v-container>
       <v-row justify="center">
         <v-col :cols="6">
@@ -38,4 +38,5 @@ const onClick = (type, keywords) => {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

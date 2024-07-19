@@ -57,6 +57,12 @@ const items = [
   { text: '标签', path: '/model/labels', icon: 'mdi-tag-multiple', iconColor: 'yellow' },
   { text: '模型', path: '/model/model', icon: 'mdi-flag', iconColor: 'blue' },
 
+  { text: '知识库', type: 'subheader' },
+  { type: 'divider' },
+  { text: '正常服务', path: '/knowledgeBase/normalService', icon: 'mdi-heart', iconColor: 'green' },
+  { text: '非法服务', path: '/knowledgeBase/illegalService', icon: 'mdi-alert', iconColor: 'yellow' },
+  { text: '模型', path: '/model/model', icon: 'mdi-flag', iconColor: 'blue' },
+
   { text: '资源', type: 'subheader' },
   { text: '网站', path: '/resource/website', icon: 'mdi-web', iconColor: 'blue' },
 ]

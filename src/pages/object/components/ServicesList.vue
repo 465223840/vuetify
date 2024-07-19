@@ -28,11 +28,7 @@
         </v-tabs-window-item>
 
         <v-tabs-window-item value="imsi">
-          Two
-        </v-tabs-window-item>
-
-        <v-tabs-window-item value="three">
-          Three
+          <ImsiTable />
         </v-tabs-window-item>
       </v-tabs-window>
     </v-card-text>
@@ -41,6 +37,7 @@
 </template>
 <script setup>
 import ServicesTable from './ServicesTable.vue'
+import ImsiTable from './ImsiTable.vue'
 
 const tab = ref(null)
 

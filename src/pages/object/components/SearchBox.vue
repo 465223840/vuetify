@@ -1,12 +1,12 @@
 <template>
-  <v-form v-model="form">
+  <v-form v-model="form" class="search-input-wrapper">
     <v-text-field :loading="loading" label="请输入查询对象" v-model="keywords" clearable single-line color="primary"
-      :rules="[rules.required]" variant="outlined" @keyup.enter="onClick">
+      :rules="[rules.required]" @keyup.enter="onClick">
       <template #prepend>
-        <v-combobox v-model="type" :items="items" hide-details variant="outlined" class="w-30" color="primary" />
+        <v-combobox v-model="type" :items="items" hide-details variant="outlined" color="primary" style="width: 120px"/>
       </template>
       <template #append-inner>
-        <v-btn density="comfortable" icon="mdi-magnify" @click.stop="onClick" />
+        <v-btn prepend-icon="mdi-magnify" @click.stop="onClick">搜索</v-btn>
       </template>
     </v-text-field>
   </v-form>
@@ -20,7 +20,7 @@ const props = defineProps({
   },
   type:{
     type:String,
-    default:'全部'
+    default: 'IMSI'
   },
   keywords:{
     type:String,
@@ -29,7 +29,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['search'])
 
-const items = ["全部", 'IMSI', '应用', '小程序', '网站']
+const items = ['IMSI', '应用', '小程序', '网站']
 
 const form = ref(false)
 const type = ref(props.type)
@@ -50,3 +50,21 @@ const onClick = () => {
   emit('search',type.value,keywords.value)
 }
 </script>
+
+<style lang="scss" scoped>
+  .search-input-wrapper {
+    height: 58px;
+    border: 2px solid blue;
+    border-radius: 4px;
+    ::v-deep .v-field__outline {
+      --v-field-border-width: 0;
+    }
+    ::v-deep .v-input--horizontal .v-input__prepend {
+      margin-inline-end: 0;
+      padding-top: 0;
+    }
+    ::v-deep .v-field__append-inner {
+      padding-top: 6px;
+    }
+  }
+</style>
