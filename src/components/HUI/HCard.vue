@@ -10,20 +10,17 @@
     </div>
 
     <div class="body">
-      {{ value }}
+      <slot />
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-
 const props = defineProps({
   title: {
     type: String,
     default: ''
-  },
-
+  }
 })
 
 

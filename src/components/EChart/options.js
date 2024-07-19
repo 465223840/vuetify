@@ -13,15 +13,12 @@ export default {
   },
   xAxis: {
     data: [],
-    axisLabel: {
-      padding: [0, 0, 0, 0],
-      rotate: -30 // X轴标签倾斜 45 度
-    }
+
   },
   grid: {
-    top: '5%',
+    top: '10%',
     left: '5%',
-    bottom:'6%'
+    bottom:'10%'
   },
   yAxis: {
     type: "value",

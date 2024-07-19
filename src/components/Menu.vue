@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer :rail="rail" permanent>
     <v-list>
-      <v-list-item prepend-avatar="@/assets/logo.png" title="开心马六" @click.stop="rail = false">
+      <v-list-item prepend-avatar="@/assets/logo.png" title="BFI" @click.stop="rail = false">
         <template v-slot:append>
           <v-btn icon="mdi-chevron-left" variant="text" @click.stop="rail = !rail" />
         </template>

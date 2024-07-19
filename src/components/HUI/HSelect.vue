@@ -1,9 +1,8 @@
 <template>
   <div class="dropdown">
     <button @click="toggleDropdown">
-      <v-icon icon="mdi-history"></v-icon>
-
-      <span> {{ selectedOption }}</span>
+      <v-icon icon="mdi-history" />
+      <span class="label"> {{ selectedOption }}</span>
       <span class="icon" :class="isOpen ? 'open' : 'close'">&#9662;</span>
     </button>
     <transition name="dropdown">
@@ -33,34 +32,37 @@ const selectOption = (option) => {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .dropdown {
   position: relative;
   display: inline-block;
   font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 
-}
+  .label {
+    font-size: 12px;
+  }
 
-.dropdown button {
-  padding: 2px;
-  background-color: #F0EFF1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100px;
-  height: 30px;
-  /* font-size: 13px; */
-  border-radius: 3px;
+  button {
+    padding: 2px;
+    background-color: #F0EFF1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 120px;
+    height: 30px;
+    border-radius: 3px;
 
+    &:hover {
+      background-color: #e5e5e5;
+    }
 
-}
-
-.dropdown button:hover {
-  background-color: #e5e5e5;
+  }
 }
 
 .icon {
-  font-size: 32px;
+  font-size: 24px;
   /* margin-left: 8px; */
   transition: transform 0.3s ease;
 }
@@ -80,16 +82,22 @@ const selectOption = (option) => {
   margin: 0;
   width: 100%;
   z-index: 1;
+
+  & li {
+    padding: 2px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    
+    cursor: pointer;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
 }
 
-.dropdown-menu li {
-  padding: 8px;
-  cursor: pointer;
-}
 
-.dropdown-menu li:hover {
-  background-color: #f1f1f1;
-}
 
 .dropdown-enter-active,
 .dropdown-leave-active {

@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full">
+  <div class="h-full p-2 bg-#F3F5F6">
     <!-- <v-navigation-drawer permanent width="360">
       <v-card density="compact" class="h-full">
         <div class="absolute w-full p-1 bg-[#FAF9FB]  border-y-2 ">
@@ -21,7 +21,24 @@
       </v-card>
     </v-navigation-drawer> -->
     <!-- <v-sheet :elevation="16" :height="200" :width="200" border rounded></v-sheet> -->
-    <div class="h-full p-2 bg-#F3F5F6">
+    <div class="h-40 border mb-2 bg-white p-4">
+      <div class=" border bg-[#F5FAFA]">
+        <div class="flex gap-2 p-2">
+          <div class="bg-[#F3F5F6] border rounded-md relative">
+            <v-icon icon="mdi-magnify" />
+            <input type="text" class="outline-none" placeholder="请输入关键词..." />
+            <div class="absolute right-0 top-0">aa</div>
+          </div>
+          <div>label</div>
+          <div>btn</div>
+        </div>
+        <div class="flex">
+          <div>ex</div>
+          <div class="self-end">btn</div>
+        </div>
+      </div>
+    </div>
+    <div class="h-full bg-#F3F5F6">
       <CardList />
     </div>
   </div>
