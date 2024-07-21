@@ -1,8 +1,12 @@
 <template>
   <div class="border bg-[#F5FAFA]">
     <div class="flex gap-2 p-2 border-b-2">
-      <h-input prefixIcon="mdi-magnify" suffixIcon="mdi-magnify" :value="searchText" placeholder="请输入关键词..."
+     <!-- <div>
+       <h-input prefixIcon="mdi-magnify" suffixIcon="mdi-magnify" :value="searchText" placeholder="请输入关键词..."
         class="w-120" @input="updateSearchText($event)" />
+       
+     </div> -->
+     <SearchBox v-model:searchText="searchText"/>
       <div class="flex gap-2 items-center">
         <draggable class="dragArea list-group" :list="cacheTags" group="tags" @change="log" itemKey="text">
           <template #item="{ element, index }">
@@ -35,6 +39,7 @@
       <div class="absolute right-2 top-2">
         <v-btn size="small" @click="clearTags">清空</v-btn>
       </div>
+      
     </div>
   </div>
 </template>
@@ -42,6 +47,8 @@
 <script setup>
 import { ref } from 'vue';
 import draggable from 'vuedraggable';
+import SearchBox from './SearchBox.vue';
+
 import LabelOperator from './LabelOperator.vue';
 
 const props = defineProps({
@@ -53,17 +60,11 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
-  searchText: {
-    type: String,
-    default: ''
-  }
+
 });
 
-const emit = defineEmits(['update:searchText']);
+const searchText = ref('')
 
-const updateSearchText = (value) => {
-  emit('update:searchText', value);
-};
 
 const clearTags = () => {
   emit('update:searchText', '');

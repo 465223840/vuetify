@@ -3,10 +3,10 @@
     <span v-if="prefixIcon" class="icon">
       <v-icon :icon="prefixIcon" />
     </span>
-    <input :type="type" :placeholder="placeholder" v-model="modelValue"
-      @input="$emit('update:modelValue', modelValue)" />
+    <input :type="type" :placeholder="placeholder" :value="input_val" @input="onInput" @focus="$emit('focus')"
+      @blur="$emit('blur')" />
     <span v-if="suffixIcon" class="icon">
-      <v-btn :icon="suffixIcon" variant="text" density="compact" />
+      <v-btn :icon="suffixIcon" variant="text" @click="$emit('search')" density="compact" />
     </span>
   </div>
 </template>
@@ -15,7 +15,7 @@
 import { defineProps, ref } from 'vue';
 
 const props = defineProps({
-  modelValue: String,
+  value: String,
   type: {
     type: String,
     default: 'text',
@@ -28,7 +28,14 @@ const props = defineProps({
   suffixIcon: String,
 });
 
-const modelValue = ref(props.modelValue);
+const emit = defineEmits(['update:value', 'blur', 'focus', 'search'])
+
+const input_val = computed(() => props.value);
+
+const onInput = () => {
+  console.log(input_val.value)
+  emit('update:value', input_val.value)
+}
 </script>
 
 <style scoped>

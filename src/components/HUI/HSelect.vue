@@ -35,7 +35,7 @@ const emit = defineEmits(['update:value'])
 
 const display = computed(() => {
   const val = props.options.find(option => option.value === props.value)?.label || '';
-  console.log(val)
+  // console.log(val)
   return val
 })
 
