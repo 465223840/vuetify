@@ -44,7 +44,7 @@
     </el-card>
     <div class="m-2.5">
       <el-button type="primary" @click="editDrawer = true">新建</el-button>
-      <el-button type="primary" plain>批量导入</el-button>
+      <el-button type="primary" plain @click="importDrawer = true">批量导入</el-button>
       <el-button type="primary" plain>批量导出</el-button>
       <el-button type="danger" plain>删除</el-button>
     </div>
