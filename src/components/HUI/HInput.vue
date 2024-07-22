@@ -3,38 +3,36 @@
     <span v-if="prefixIcon" class="icon">
       <v-icon :icon="prefixIcon" />
     </span>
-    <input :type="type" :placeholder="placeholder" :value="input_val" @input="onInput" @focus="$emit('focus')"
+    <input :type="type" :placeholder="placeholder" :value="modelValue" @input="updateValue" @focus="$emit('focus')"
       @blur="$emit('blur')" />
-    <span v-if="suffixIcon" class="icon">
-      <v-btn :icon="suffixIcon" variant="text" @click="$emit('search')" density="compact" />
+    <span class="icon">
+      <slot name="searchBtn" />
     </span>
   </div>
 </template>
 
 <script setup>
-import { defineProps, ref } from 'vue';
+import { defineProps } from 'vue';
 
 const props = defineProps({
-  value: String,
+  modelValue: String,
   type: {
     type: String,
     default: 'text',
   },
   placeholder: {
     type: String,
-    default: '',
+    default: '请输入关键词...',
   },
   prefixIcon: String,
-  suffixIcon: String,
 });
 
-const emit = defineEmits(['update:value', 'blur', 'focus', 'search'])
+const emit = defineEmits(['update:modelValue', 'blur', 'focus'])
 
-const input_val = computed(() => props.value);
 
-const onInput = () => {
-  console.log(input_val.value)
-  emit('update:value', input_val.value)
+const updateValue = (e) => {
+  console.log(e.target.value)
+  emit('update:modelValue', e.target.value)
 }
 </script>
 
@@ -58,7 +56,7 @@ const onInput = () => {
   border: none;
   outline: none;
   flex: 1;
-  padding: 4px;
+  /* padding: 0px; */
   font-size: 15px;
 }
 

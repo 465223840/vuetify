@@ -56,10 +56,10 @@ watch(() => props.text, (newVal) => {
 
 <style lang="scss" scoped>
 .tag {
-  max-height: 24px;
+  max-height: 28px;
   color: #333333;
 
-  padding: 2px 8px;
+  padding: 4px 10px;
   border-radius: 4px;
   cursor: move;
   user-select: none;

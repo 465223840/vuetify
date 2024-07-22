@@ -5,7 +5,6 @@
       <div class="btns">
 
         <slot name='btns' />
-        <!-- <v-select class="compact-select" density="compact" variant="solo-filled" :items="['饼图', '柱状图']" /> -->
       </div>
     </div>
 

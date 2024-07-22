@@ -1,12 +1,22 @@
 <template>
   <div class="border bg-[#F5FAFA]">
     <div class="flex gap-2 p-2 border-b-2">
-     <!-- <div>
-       <h-input prefixIcon="mdi-magnify" suffixIcon="mdi-magnify" :value="searchText" placeholder="请输入关键词..."
-        class="w-120" @input="updateSearchText($event)" />
-       
-     </div> -->
-     <SearchBox v-model:searchText="searchText"/>
+      <v-autocomplete :loading="loading" prepend-inner-icon="mdi-magnify" density="compact" label="请输入关键词..."
+        variant="solo" hide-details single-line max-width="340" v-model="searchText" clearable menu-icon="" :items=items
+        @keyup.enter="onEnter">
+        <template #append>
+          <v-btn icon="mdi-globe-model" tile density="compact" variant="text" color="primary" v-bind="props">
+            <v-icon icon="mdi-globe-model" />
+            <v-menu activator="parent" :close-on-content-click="false">
+              <LabelTree />
+            </v-menu>
+          </v-btn>
+        </template>
+      </v-autocomplete>
+
+
+
+
       <div class="flex gap-2 items-center">
         <draggable class="dragArea list-group" :list="cacheTags" group="tags" @change="log" itemKey="text">
           <template #item="{ element, index }">
@@ -37,19 +47,21 @@
         </div>
       </div>
       <div class="absolute right-2 top-2">
-        <v-btn size="small" @click="clearTags">清空</v-btn>
+        <v-btn size="small">清空</v-btn>
       </div>
-      
+
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import draggable from 'vuedraggable';
-import SearchBox from './SearchBox.vue';
 
 import LabelOperator from './LabelOperator.vue';
+
+const loading = ref(false)
+const searchText = ref('')
+
 
 const props = defineProps({
   calcTags: {
@@ -63,12 +75,34 @@ const props = defineProps({
 
 });
 
-const searchText = ref('')
+const onEnter = () => {
+  console.log(123)
+}
 
+const label_tree = [
+  {
+    title: '标签1', value: 1, children: [
+      { title: '标签1-1', value: 11 }
+    ]
+  },
+  { title: '标签1', value: 1, },
+]
 
-const clearTags = () => {
-  emit('update:searchText', '');
-};
+const items = computed(() => flattenTags(label_tree))
+
+const flattenTags = (data, parentTitle = '') => {
+  const result = [];
+  data.forEach(item => {
+    const currentTitle = parentTitle ? `${parentTitle}-${item.title}` : item.title;
+    if (item.children && item.children.length > 0) {
+      result.push(...flattenTags(item.children, currentTitle));
+    } else {
+      result.push(currentTitle);
+    }
+  });
+  return result;
+}
+
 
 const log = (evt) => {
   console.log(evt);
@@ -90,5 +124,9 @@ const log = (evt) => {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+:deep(.v-field__input) {
+  min-height: auto;
 }
 </style>
