@@ -1,6 +1,6 @@
 <template>
   <div class="border bg-[#F5FAFA]">
-    <div class="flex gap-2 p-2 border-b-2">
+    <div class="flex gap-2 p-3 border-b-2">
       <v-autocomplete :loading="loading" prepend-inner-icon="mdi-magnify" density="compact" label="请输入关键词..."
         variant="solo" hide-details single-line max-width="340" v-model="searchText" clearable menu-icon="" :items=items
         @keyup.enter="onEnter">
@@ -14,9 +14,6 @@
         </template>
       </v-autocomplete>
 
-
-
-
       <div class="flex gap-2 items-center">
         <draggable class="dragArea list-group" :list="cacheTags" group="tags" @change="log" itemKey="text">
           <template #item="{ element, index }">
@@ -28,9 +25,9 @@
           </template>
         </draggable>
       </div>
-      <!-- <h-select class="ml-auto"></h-select> -->
     </div>
-    <div class="p-2 min-h-10 relative">
+
+    <div class="p-3 relative">
       <div class="flex flex-wrap mr-20">
         <LabelOperator />
         <div class="mx-4">|</div>
@@ -49,7 +46,6 @@
       <div class="absolute right-2 top-2">
         <v-btn size="small">清空</v-btn>
       </div>
-
     </div>
   </div>
 </template>
@@ -127,6 +123,6 @@ const log = (evt) => {
 }
 
 :deep(.v-field__input) {
-  min-height: auto;
+  /* min-height: auto; */
 }
 </style>
