@@ -41,8 +41,9 @@ const hide_tags = ref([
 const list = [
   {
     title: '兵役情况',
-    seriesData: [1, 2, 3],
-    xAxisData: ['a', 'b', 'c']
+    type: 'bar',
+    seriesData: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+    xAxisData: ['aaaaaa', 'bbbbbb', 'cccccc', 'dddddd', 'eeeeee', 'ffffff', 'gggggg', 'hhhhhh', 'iiiiii', 'jjjjjj', 'kkkkkk', 'llllll', 'mmmmmm', 'nnnnnn', 'oooooo', 'pppppp', 'qqqqqq', 'rrrrrr', 'ssssss']
   },
   {
     title: '兵役情况',
@@ -58,6 +59,7 @@ const list = [
   },
   {
     title: '兵役情况',
+    type: 'bar',
     seriesData: [11, 12, 13],
     xAxisData: ['a', 'b', 'c']
   }

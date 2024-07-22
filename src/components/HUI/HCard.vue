@@ -3,8 +3,8 @@
     <div class="title">
       <div>{{ title }}</div>
       <div class="btns">
-        <h-select />
-        <!-- <slot name='btn' /> -->
+
+        <slot name='btns' />
         <!-- <v-select class="compact-select" density="compact" variant="solo-filled" :items="['饼图', '柱状图']" /> -->
       </div>
     </div>

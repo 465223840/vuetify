@@ -1,11 +1,12 @@
 <template>
   <v-row>
-    <v-col v-for="item in list" :key="item" cols="4">
-      <!-- <v-col v-for="item in list" :key="item" cols="4" sm="12" lg="6" xl="4" xxl="3"> -->
+    <v-col v-for="item in list" :key="item" cols="4" sm="12" lg="4" xl="3" xxl="2">
       <h-card :title="item.title">
+        <template #btns>
+          <h-select :options="options" v-model:value="item.type" />
+        </template>
         <component :is="componentId(item.type)" :data="item.data" :xAxisData="item.xAxisData"
           :legendData="item.legendData" :seriesData="item.seriesData" />
-        <!-- <BarChart :data="item.data" type="bar" :xAxisData="item.xAxisData" /> -->
       </h-card>
     </v-col>
   </v-row>
@@ -14,6 +15,11 @@
 <script setup>
 import bar from '@/components/EChart/Bar.vue';
 import pie from '@/components/EChart/Pie.vue';
+
+const options = [
+  { label: '柱状图', value: 'bar' },
+  { label: '饼图', value: 'pie' }
+]
 
 const componentId = (type) => {
   switch (type) {
