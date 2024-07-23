@@ -16,7 +16,7 @@
 
       <h-card :title="item.title" class="transition-all duration-300 ease-in-out hover:shadow-xl">
         <template #btns>
-          <h-select :options="options" v-model:value="item.type" />
+          <h-select :options="options" v-model:value="item.type" icon="mdi-history" />
           <v-btn icon="mdi-window-minimize" density="compact" variant="text" class="text-xs"
             @click="minimizeItem(item)" />
 

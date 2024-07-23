@@ -1,9 +1,9 @@
 <template>
   <div class="dropdown">
     <button @click="toggleDropdown">
-      <v-icon icon="mdi-history" />
-      <span class="label"> {{ display }}</span>
-      <span class="icon" :class="isOpen ? 'open' : 'close'">&#9662;</span>
+      <v-icon :icon="icon" />
+      <div class="label"> {{ display }}</div>
+      <div class="icon" :class="isOpen ? 'open' : 'close'">&#9662;</div>
     </button>
     <transition name="dropdown">
       <ul v-if="isOpen" class="dropdown-menu" v-click-outside="() => isOpen = false">
@@ -27,12 +27,16 @@ const props = defineProps(
     },
     value: {
       type: String,
-      required: true
-    }
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: ''
+    },
   }
 )
-const emit = defineEmits(['update:value'])
-
+const emit = defineEmits(['update:value', 'select'])
+const value = computed(() => props.value)
 const display = computed(() => {
   const val = props.options.find(option => option.value === props.value)?.label || '';
   // console.log(val)
@@ -51,8 +55,8 @@ const toggleDropdown = () => {
 
 const selectOption = (option) => {
   emit('update:value', option);
+  emit('select', option);
 
-  console.log(2)
   isOpen.value = false;
 };
 </script>
@@ -64,21 +68,23 @@ const selectOption = (option) => {
   display: inline-block;
   font-size: 14px;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 4px;
+  background-image: linear-gradient(180deg, #F3F5F8, #d6d6d6);
+  // background-color: #fff;
+  // width: 100%
 
   .label {
+    margin: 0 4px;
     font-size: 12px;
   }
 
   button {
     padding: 4px;
-    background-color: #F0EFF1;
+    // background-color: #F0EFF1;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-width: 100px;
     height: 26px;
-    border-radius: 3px;
 
     &:hover {
       background-color: #e5e5e5;
