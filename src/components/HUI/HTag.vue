@@ -1,10 +1,9 @@
 <template>
-  <div :class="['tag', border && 'border']" v-if="visible" :style="{ color: color, background: '#fff' }">
+  <div :class="['tag', border && 'border']" :style="{ color: color, background: '#fff' }">
     <div class="h-full flex items-center text-xs ">
-      <span v-if="modelValue">{{ tag }}</span>
-      <slot v-else />
+      <slot />
       <span v-if="count" class="ml-2">{{ count }}</span>
-      <span v-if="clearable" class="remove-icon" @click="removeTag">&#10005;</span>
+      <span v-if="clearable" class="remove-icon" @click="onRemove">&#10005;</span>
     </div>
   </div>
 </template>
@@ -34,24 +33,16 @@ const props = defineProps({
     default: false,
   },
 });
-
-const visible = ref(true);
 const tag = ref(props.text);
 
-const removeTag = () => {
-  visible.value = false;
-  emitUpdate('');
-};
+const emit = defineEmits(['remove'])
 
-const emitUpdate = (value) => {
-  tag.value = value;
-  props.text = value;
-};
+const onRemove = () => {
+  emit('remove')
+}
 
-watch(() => props.text, (newVal) => {
-  tag.value = newVal;
-  visible.value = !!newVal;
-});
+
+
 </script>
 
 <style lang="scss" scoped>
