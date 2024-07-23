@@ -5,8 +5,8 @@
       <el-button
         type="danger"
         link
-        :icon="Delete"
       >
+        <el-icon class="mr-1.5"><Delete /></el-icon>
         清空
       </el-button>
     </el-row>
@@ -25,9 +25,6 @@
   </div>
 </template>
 <script setup>
-import {
-  Delete
-} from '@element-plus/icons-vue'
 const emit = defineEmits(['click'])
 
 const items = [

@@ -68,8 +68,26 @@
         <el-table-column label="建立时间" prop="devCompany"></el-table-column>
         <el-table-column label="操作">
           <template #default="scope">
-            <el-button @click="editDrawer = true"><el-icon><Edit /></el-icon></el-button>
-            <el-button><el-icon><Delete /></el-icon></el-button>
+            <el-tooltip
+              effect="dark"
+              content="编辑"
+              placement="top"
+            >
+              <el-button
+                class="btn-icon"
+                type="primary"
+                text><el-icon><Edit /></el-icon></el-button>
+            </el-tooltip>
+            <el-tooltip
+              effect="dark"
+              content="删除"
+              placement="top"
+            >
+              <el-button
+                class="btn-icon"
+                type="primary"
+                text><el-icon><Delete /></el-icon></el-button>
+            </el-tooltip>
           </template>
         </el-table-column>
       </el-table>
@@ -194,13 +212,6 @@
 </template>
 
 <script setup>
-import {
-  Delete,
-  Edit,
-  Search,
-  Plus,
-  UploadFilled
-} from '@element-plus/icons-vue'
 const queryForm = reactive({
   keyword: '',
   type: '',

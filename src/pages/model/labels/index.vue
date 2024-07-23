@@ -133,8 +133,9 @@
                   <el-button
                     class="btn-icon"
                     type="primary"
-                    text
-                    :icon="InfoFilled"></el-button>
+                    text>
+                    <el-icon><InfoFilled /></el-icon>
+                  </el-button>
                 </el-tooltip>
                 <el-tooltip
                   effect="dark"
@@ -144,8 +145,9 @@
                   <el-button
                     class="btn-icon"
                     type="primary"
-                    text
-                    :icon="Edit"></el-button>
+                    text>
+                    <el-icon><Edit /></el-icon>
+                  </el-button>
                 </el-tooltip>
                 <el-tooltip
                   v-if="!scope.row.status"
@@ -156,8 +158,9 @@
                   <el-button
                     class="btn-icon"
                     type="primary"
-                    text
-                    :icon="VideoPlay"></el-button>
+                    text>
+                    <el-icon><VideoPlay /></el-icon>
+                  </el-button>
                 </el-tooltip>
                 <el-tooltip
                   v-if="scope.row.status"
@@ -168,15 +171,17 @@
                   <el-button
                     class="btn-icon"
                     type="primary"
-                    text
-                    :icon="VideoPause"></el-button>
+                    text>
+                    <el-icon><videoPause /></el-icon>
+                  </el-button>
                 </el-tooltip>
                 <el-dropdown>
                   <el-button
                     class="btn-icon"
                     type="primary"
-                    text
-                    :icon="MoreFilled"></el-button>
+                    text>
+                    <el-icon><MoreFilled /></el-icon>
+                  </el-button>
                   <template #dropdown>
                     <el-dropdown-menu>
                       <el-dropdown-item>删除</el-dropdown-item>
@@ -211,16 +216,6 @@
 
 <script setup>
 import AddLabel from '../components/AddLabel.vue';
-import {
-  InfoFilled,
-  Edit,
-  StarFilled,
-  Refresh,
-  VideoPlay,
-  VideoPause,
-  MoreFilled,
-  Plus
-} from '@element-plus/icons-vue'
 
 const addLabelDrawer = ref(false)
 

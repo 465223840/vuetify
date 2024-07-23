@@ -21,8 +21,8 @@
     </template>
     <template #append>
       <el-button
-        :icon="Search"
         @click.stop="onClick">
+        <el-icon class="mr-1.5"><Search /></el-icon>
         搜索
       </el-button>
     </template>
@@ -30,10 +30,6 @@
 </template>
 
 <script setup >
-import {
-  Delete,
-  Search
-} from '@element-plus/icons-vue'
 const props = defineProps({
   loading:{
     type:Boolean,

@@ -31,8 +31,7 @@
           <el-button
             class="btn-icon"
             type="primary"
-            text
-            :icon="InfoFilled"></el-button>
+            text><el-icon><InfoFilled /></el-icon></el-button>
         </el-tooltip>
         <el-tooltip
           v-if="!scope.row.collect"
@@ -43,8 +42,7 @@
           <el-button
             class="btn-icon"
             type="primary"
-            text
-            :icon="Star"></el-button>
+            text><el-icon><Star /></el-icon></el-button>
         </el-tooltip>
         <el-tooltip
           v-if="scope.row.collect"
@@ -55,8 +53,7 @@
           <el-button
             class="btn-icon"
             type="primary"
-            text
-            :icon="StarFilled"></el-button>
+            text><el-icon><StarFilled /></el-icon></el-button>
         </el-tooltip>
         <el-tooltip
           effect="dark"
@@ -66,8 +63,7 @@
           <el-button
             class="btn-icon"
             type="primary"
-            text
-            :icon="Refresh"></el-button>
+            text><el-icon><Refresh /></el-icon></el-button>
         </el-tooltip>
       </template>
     </el-table-column>
@@ -78,13 +74,6 @@
 </template>
 
 <script setup>
-import {
-  InfoFilled,
-  Star,
-  StarFilled,
-  Refresh
-} from '@element-plus/icons-vue'
-
 const items = [
   {
     name: '新竹市家庭教育中心',

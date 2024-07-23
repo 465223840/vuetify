@@ -41,8 +41,7 @@
           <el-button
             class="btn-icon"
             type="primary"
-            text
-            :icon="InfoFilled"></el-button>
+            text><el-icon><InfoFilled /></el-icon></el-button>
         </el-tooltip>
         <el-tooltip
           v-if="!scope.row.collect"
@@ -53,8 +52,7 @@
           <el-button
             class="btn-icon"
             type="primary"
-            text
-            :icon="Star"></el-button>
+            text><el-icon><Star /></el-icon></el-button>
         </el-tooltip>
         <el-tooltip
           v-if="scope.row.collect"
@@ -65,23 +63,17 @@
           <el-button
             class="btn-icon"
             type="primary"
-            text
-            :icon="StarFilled"></el-button>
+            text><el-icon><StarFilled /></el-icon></el-button>
         </el-tooltip>
       </template>
     </el-table-column>
   </el-table>
-  <el-pagination layout="prev, pager, next" :total="50" />
+  <el-row class="mt-6 mb-2.5" justify="center">
+    <el-pagination layout="prev, pager, next" :total="50" />
+  </el-row>
 </template>
 
 <script setup>
-import {
-  InfoFilled,
-  Star,
-  StarFilled,
-  Refresh
-} from '@element-plus/icons-vue'
-
 const items = [
   {
     imsi_id: '1781683296486',

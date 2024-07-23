@@ -54,13 +54,6 @@
 </template>
 
 <script setup>
-import {
-  InfoFilled,
-  Star,
-  StarFilled,
-  Refresh
-} from '@element-plus/icons-vue'
-
 const label_set = ref('structure')
 const form = reactive({
   label_name: '',
