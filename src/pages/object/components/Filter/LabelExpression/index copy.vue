@@ -2,8 +2,8 @@
   <div class="border bg-[#F5FAFA] ">
     <div class="flex gap-2 p-3 border-b-2">
       <v-autocomplete :loading="loading" prepend-inner-icon="mdi-magnify" density="compact" label="请输入关键词..."
-        variant="solo" hide-details single-line v-model="searchText" clearable menu-icon="" :items=items
-        @keyup.enter="onEnter" class="w-1/4">
+        variant="solo" hide-details single-line max-width="340" v-model="searchText" clearable menu-icon="" :items=items
+        @keyup.enter="onEnter">
         <template #append>
           <v-btn icon="mdi-globe-model" tile density="compact" variant="text" color="primary" v-bind="props">
             <v-icon icon="mdi-globe-model" />
@@ -14,17 +14,20 @@
         </template>
       </v-autocomplete>
 
-      <div class="flex gap-2 items-center w-3/4 bg-red">
-        <draggable class="dragArea list-group" :list="cacheTags" group="tags" @change="log" itemKey="text">
-          <template #item="{ element, index }">
+
+      <draggable class="dragArea list-group" :list="cacheTags" group="tags" @change="log" itemKey="text">
+
+        <template #item="{ element, index }">
+          <div class="flex gap-2 items-center w-3/4 bg-red">
             <transition name="fade">
               <h-tag :count="element.count" :key="index">
                 {{ element.text }}
               </h-tag>
             </transition>
-          </template>
-        </draggable>
-      </div>
+          </div>
+        </template>
+
+      </draggable>
     </div>
 
     <div class="p-3 relative">

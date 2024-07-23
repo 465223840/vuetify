@@ -1,5 +1,5 @@
 <template>
-  <div :class="['tag', border && 'border']" v-if="visible" :style="{ backgroundColor: color }">
+  <div :class="['tag', border && 'border']" v-if="visible" :style="{ color: color, background: '#fff' }">
     <div class="h-full flex items-center text-xs">
       <span v-if="modelValue">{{ tag }}</span>
       <slot v-else />
@@ -19,7 +19,7 @@ const props = defineProps({
   },
   color: {
     type: String,
-    default: 'white',
+    default: '#000',
   },
   count: {
     type: Number,

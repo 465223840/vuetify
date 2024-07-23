@@ -15,7 +15,6 @@
           <v-btn density="compact" size="small">前三天</v-btn>
           <v-btn density="compact" size="small">前一周</v-btn>
           <v-btn density="compact" size="small">自定义</v-btn>
-          <!-- <CustomDatePicker /> -->
           date
         </v-btn-toggle>
       </div>
@@ -34,47 +33,32 @@
     <v-btn density="comfortable" icon="mdi-play-circle-outline" size="small" tile />
     <v-btn density="comfortable" icon="mdi-file-export" size="small" tile class="mr-4" />
     <v-btn density="comfortable" icon="mdi-tray-arrow-down" size="small" tile />
-    <v-btn-toggle v-model="toggle" variant="outlined" color="primary">
-      <v-btn density="comfortable" icon="mdi-poll" size="small" tile />
-      <v-btn density="comfortable" icon="mdi-format-list-bulleted" size="small" tile />
-    </v-btn-toggle>
-    <!-- {{ toggle }} -->
+
+    <div>
+      <v-btn density="comfortable" icon="mdi-poll" size="small" tile :color="toggle == '0' ? 'primary' : ''"
+        :active="toggle == '0'" @click="emit('update:toggle', '0')" />
+
+      <v-btn density="comfortable" icon="mdi-poll" size="small" tile :color="toggle == '1' ? 'primary' : ''"
+        :active="toggle == '1'" @click="emit('update:toggle', '1')" />
+    </div>
+
+
   </div>
 </template>
 
 <script setup>
-import CustomDatePicker from '../../CustomDatePicker'
-const value2 = ref('')
-const toggle = ref(1)
-const shortcuts = [
-  {
-    text: '近3天',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 3)
-      return [start, end]
-    },
-  },
-  {
-    text: '近7天',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-      return [start, end]
-    },
-  },
-  {
-    text: '近30天',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-      return [start, end]
-    },
-  },
-]
+// const toggle = ref(0)
+
+const props = defineProps(['toggle'])
+
+
+
+const emit = defineEmits(['update:toggle'])
+// watch(toggle, (val) => {
+//   emit('update:toggle', val)
+// })
+const toggle = computed(() => props.toggle)
+
 </script>
 
 <style lang="scss" scoped></style>

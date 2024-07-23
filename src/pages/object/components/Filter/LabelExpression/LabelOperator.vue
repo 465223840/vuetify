@@ -3,7 +3,7 @@
     @change="log" itemKey="text">
     <template #item="{ element, index }">
       <transition name="fade">
-        <h-tag :count="element.count" :key="index">
+        <h-tag :count="element.count" :key="index" :color="element.color">
           {{ element.text }}
         </h-tag>
       </transition>
@@ -16,10 +16,10 @@ import { ref } from 'vue';
 import draggable from 'vuedraggable';
 
 const operatorTags = ref([
-  { text: '&' },
-  { text: '|' },
-  { text: '!' },
-  { text: '()' },
+  { text: '&', color: 'blue' },
+  { text: '|', color: 'green' },
+  { text: '!', color: 'red' },
+  { text: '()', color: 'black' },
 ]);
 
 const log = (evt) => {
