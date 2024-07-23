@@ -22,8 +22,8 @@
     "element-plus": "^2.7.7",
     "roboto-fontface": "*",
     "vue": "^3.4.0",
+    "vue-draggable-plus": "^0.5.2",
     "vue-i18n": "9",
-    "vuedraggable": "^4.1.0",
     "vuetify": "^3.6.10"
   },
   "devDependencies": {

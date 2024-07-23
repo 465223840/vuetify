@@ -34,12 +34,12 @@ const toggle = ref(0)
 
 const searchText = ref('')
 const cache_tags = ref([
-  { text: '女士', count: 100 },
-  { text: '学生', count: 200 },
+  { name: '女士', count: 100 },
+  { name: '学生', count: 200 },
 ])
 const calc_tags = ref([
-  { text: '女士', count: 100 },
-  { text: '学生', count: 200 },
+  { name: '女士', count: 100 },
+  { name: '学生', count: 200 },
 ])
 
 

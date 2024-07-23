@@ -1,6 +1,6 @@
 <template>
   <div :class="['tag', border && 'border']" v-if="visible" :style="{ color: color, background: '#fff' }">
-    <div class="h-full flex items-center text-xs">
+    <div class="h-full flex items-center text-xs ">
       <span v-if="modelValue">{{ tag }}</span>
       <slot v-else />
       <span v-if="count" class="ml-2">{{ count }}</span>
