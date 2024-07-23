@@ -91,6 +91,7 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-link type="primary">测试颜色</el-link>
     </el-card>
     <el-drawer
       v-model="editDrawer"

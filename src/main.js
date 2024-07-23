@@ -10,9 +10,9 @@ import "./styles/tailwind.css";
 import "./styles/el.scss";
 // Components
 import App from "./App.vue";
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import "./styles/element-variables.scss";
+import ElementPlus from 'element-plus';
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 
 // Composables
 import { createApp } from "vue";
