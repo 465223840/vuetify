@@ -1,18 +1,39 @@
 <template>
-  <v-form v-model="form" class="search-input-wrapper">
-    <v-text-field :loading="loading" label="请输入查询对象" v-model="keywords" clearable single-line color="primary"
-      :rules="[rules.required]" @keyup.enter="onClick">
-      <template #prepend>
-        <v-combobox v-model="type" :items="items" hide-details variant="outlined" color="primary" style="width: 120px"/>
-      </template>
-      <template #append-inner>
-        <v-btn prepend-icon="mdi-magnify" @click.stop="onClick">搜索</v-btn>
-      </template>
-    </v-text-field>
-  </v-form>
+  <el-input
+    v-model="keywords"
+    placeholder="请输入搜索关键词..."
+    class="search-input"
+    clearable
+    :rules="[rules.required]"
+    @keyup.enter="onClick"
+  >
+    <template #prepend>
+      <el-select
+        v-model="type"
+        placeholder="Select"
+        style="width: 100px">
+        <el-option
+          v-for="opt in items"
+          :key="opt"
+          :label="opt"
+          :value="opt" />
+      </el-select>
+    </template>
+    <template #append>
+      <el-button
+        :icon="Search"
+        @click.stop="onClick">
+        搜索
+      </el-button>
+    </template>
+  </el-input>
 </template>
 
 <script setup >
+import {
+  Delete,
+  Search
+} from '@element-plus/icons-vue'
 const props = defineProps({
   loading:{
     type:Boolean,
@@ -52,19 +73,58 @@ const onClick = () => {
 </script>
 
 <style lang="scss" scoped>
-  .search-input-wrapper {
+  $primary: #406fc9;
+  $primary-hover: #2f6adc;
+  $main: #000033;
+  $placeholder: #616b7a;
+  .search-input {
     height: 58px;
-    border: 2px solid blue;
+    border: 1px solid $primary;
     border-radius: 4px;
-    ::v-deep .v-field__outline {
-      --v-field-border-width: 0;
+    :deep(.el-input__wrapper) {
+      font-size: 16px;
+      box-shadow: none;
     }
-    ::v-deep .v-input--horizontal .v-input__prepend {
-      margin-inline-end: 0;
-      padding-top: 0;
+    :deep(.el-input-group__prepend),
+    :deep(.el-input-group__append) {
+      font-size: 16px;
+      background: #fff;
+      box-shadow: none;
     }
-    ::v-deep .v-field__append-inner {
-      padding-top: 6px;
+    :deep(.el-input__inner),
+    :deep(.el-select__placeholder) {
+      color: $main;
+      &::placeholder {
+        color: $placeholder;
+      }
+    }
+    :deep(.el-button) {
+      display: flex;
+      align-items: center;
+      height: 44px;
+      width: 110px;
+      color: #fff;
+      background: $primary;
+      margin-right: -12px;
+      &:hover {
+        color: #fff;
+        background-color: $primary-hover;
+      }
+    }
+    .el-input-group__prepend .el-select :deep(.el-select__wrapper) {
+      height: 56px;
+      font-size: 16px;
+      background: #fff;
+      box-shadow: none;
+      &:after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 15px;
+        bottom: 15px;
+        width: 1px;
+        background-color: #d4d8dd;
+      }
     }
   }
 </style>

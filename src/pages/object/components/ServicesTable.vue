@@ -1,52 +1,95 @@
 <template>
-  <v-data-table :items="items" :headers="headers">
-    <template v-slot:item.name="{ item }">
-      <v-btn color="primary" variant="plain">{{ item.name }}</v-btn>
-    </template>
-    <template v-slot:item.user_count="{ item }">
-      <v-btn color="primary" variant="plain">{{ item.user_count }}</v-btn>
-    </template>
-    <template v-slot:item.discovery_time="{ item }">
-      <div>最早：{{ item.discovery_time[0] }}</div>
-      <div>最晚：{{ item.discovery_time[1] }}</div>
-    </template>
-    <template v-slot:item.action="{ item }">
-      <v-tooltip text="详情">
-        <template #activator="{ props }">
-          <v-btn v-bind="props" icon="mdi-information-outline" color="primary" variant="plain" size="small" />
-        </template>
-      </v-tooltip>
-      <v-tooltip text="收藏">
-        <template #activator="{ props }">
-          <v-btn v-bind="props" icon="mdi-information-outline" color="primary" variant="plain" size="small" />
-        </template>
-      </v-tooltip>
-      <v-tooltip text="刷新">
-        <template #activator="{ props }">
-          <v-btn v-bind="props" icon="mdi-refresh" color="primary" variant="plain" size="small" />
-        </template>
-      </v-tooltip>
-
-    </template>
-  </v-data-table>
+  <el-table :data="items">
+    <el-table-column label="序号" type="index" width="55px"></el-table-column>
+    <el-table-column label="网站名称" prop="name">
+      <template #default="scope">
+        <el-link type="primary">{{ scope.row.name }}</el-link>
+      </template>
+    </el-table-column>
+    <el-table-column label="域名" prop="domain"></el-table-column>
+    <el-table-column label="地域" prop="region"></el-table-column>
+    <el-table-column label="政府服务" prop="gov_services"></el-table-column>
+    <el-table-column label="行业属性" prop="industry_attributes"></el-table-column>
+    <el-table-column label="用户数量" prop="user_count">
+      <template #default="scope">
+        <el-link type="primary">{{ scope.row.user_count }}</el-link>
+      </template>
+    </el-table-column>
+    <el-table-column label="发现时间" prop="discovery_time" width="240px">
+      <template #default="scope">
+        最早：{{ scope.row.discovery_time[0] }} <br />
+        最晚：{{ scope.row.discovery_time[1] }}
+      </template>
+    </el-table-column>
+    <el-table-column label="操作">
+      <template #default="scope">
+        <el-tooltip
+          effect="dark"
+          content="详情"
+          placement="top"
+        >
+          <el-button
+            class="btn-icon"
+            type="primary"
+            text
+            :icon="InfoFilled"></el-button>
+        </el-tooltip>
+        <el-tooltip
+          v-if="!scope.row.collect"
+          effect="dark"
+          content="收藏"
+          placement="top"
+        >
+          <el-button
+            class="btn-icon"
+            type="primary"
+            text
+            :icon="Star"></el-button>
+        </el-tooltip>
+        <el-tooltip
+          v-if="scope.row.collect"
+          effect="dark"
+          content="取消收藏"
+          placement="top"
+        >
+          <el-button
+            class="btn-icon"
+            type="primary"
+            text
+            :icon="StarFilled"></el-button>
+        </el-tooltip>
+        <el-tooltip
+          effect="dark"
+          content="更新信息"
+          placement="top"
+        >
+          <el-button
+            class="btn-icon"
+            type="primary"
+            text
+            :icon="Refresh"></el-button>
+        </el-tooltip>
+      </template>
+    </el-table-column>
+  </el-table>
+  <el-row class="mt-6 mb-2.5" justify="center">
+    <el-pagination layout="prev, pager, next" :total="50" />
+  </el-row>
 </template>
 
 <script setup>
-const headers = ref([
-  { title: '网站名称', key: 'name' },
-  { title: '域名', key: 'domain' },
-  { title: '地域', key: 'region' },
-  { title: '政府服务', key: 'gov_services' },
-  { title: '行业属性', key: 'industry_attributes' },
-  { title: '用户数量', key: 'user_count' },
-  { title: '发现时间', key: 'discovery_time' },
-  { title: '操 作', key: 'action' }
-])
+import {
+  InfoFilled,
+  Star,
+  StarFilled,
+  Refresh
+} from '@element-plus/icons-vue'
 
 const items = [
   {
     name: '新竹市家庭教育中心',
     domain: 'dep-family.hccg.gov.tw',
+    collect: true,
     region: "台湾",
     gov_services: "教育",
     industry_attributes: "培训教育",
@@ -56,6 +99,7 @@ const items = [
   {
     name: '新竹市家庭教育中心',
     domain: 'dep-family.hccg.gov.tw',
+    collect: false,
     region: "台湾",
     gov_services: "教育",
     industry_attributes: "培训教育",

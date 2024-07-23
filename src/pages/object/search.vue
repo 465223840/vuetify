@@ -1,24 +1,13 @@
 <template>
-  <div class="flex justify-center align-center search-page-wrapper">
-    <v-container>
-      <v-row justify="center">
-        <v-col :cols="6">
-          <v-sheet class="ma-8 pa-2 text-center text-5xl font-bold text-#7291bf">
-            画像查询
-          </v-sheet>
-        </v-col>
-      </v-row>
-      <v-row justify="center" no-gutters>
-        <v-col :cols="6">
-          <SearchBox :loading="loading" @search="onClick" />
-        </v-col>
-      </v-row>
-      <v-row justify="center">
-        <v-col :cols="5">
-          <History @click="onClick" />
-        </v-col>
-      </v-row>
-    </v-container>
+  <div class="search-page-wrapper">
+    <div class="search-container">
+      <div class="search-logo">
+        <img class="logo" src="../../assets/images/logo.png" alt="">
+        <img class="logo-text" src="../../assets/images/search-logo-text.png" alt="">
+      </div>
+      <SearchBox :loading="loading" @search="onClick" />
+      <History @click="onClick" />
+    </div>
   </div>
 </template>
 
@@ -39,4 +28,27 @@ const onClick = (type, keywords) => {
 </script>
 
 <style lang="scss" scoped>
+.search-page-wrapper {
+  height: 100%;
+  background: url(../../assets/images/search-bg.jpg) no-repeat center center;
+  background-size: cover;
+  overflow: hidden;
+  .search-container {
+    width: 1000px;
+    margin:  180px auto 0;
+    .search-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 50px;
+      .logo {
+        height: 80px;
+      }
+      .logo-text {
+        height: 60px;
+        margin-left: 35px;
+      }
+    }
+  }
+}
 </style>

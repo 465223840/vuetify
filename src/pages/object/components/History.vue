@@ -1,25 +1,33 @@
 <template>
-  <div class="flex gap-2 flex-wrap">
-    <!-- <div v-for="(item, i) in items" :key="i" class="p-2 flex justify-between align-center"
-      @click="$emit('click', item.text)">
-      <div flex>
-        <div absolute>
-          <v-chip :color="color(item.type)" density="compact" class="text-center">
-            {{ item.type }}
-          </v-chip>
-        </div>
-        <v-btn class="ml-18" density="compact" variant="text">
-          {{ item.text }}
-        </v-btn>
-      </div>
-      <v-btn icon="mdi-close" density="compact" size="small" variant="text" />
-    </div> -->
-    <v-btn :color="color(item.type)" variant="plain" flat class="text-none" border v-for="(item, i) in items" @click="()=>onClick(item.type,item.text)">
-      {{ item.type }} ：{{ item.text }}
-    </v-btn>
+  <div class="search-history" v-show="items.length > 0">
+    <el-row class="mt-2.5" justify="space-between" align="middle">
+      搜索历史
+      <el-button
+        type="danger"
+        link
+        :icon="Delete"
+      >
+        清空
+      </el-button>
+    </el-row>
+    <div class="history-list">
+      <ul>
+        <li
+          class="item"
+          v-for="(item, i) in items"
+          :key="i"
+          @click="()=>onClick(item.type,item.text)"
+          >
+          {{ item.type }} ：{{ item.text }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script setup>
+import {
+  Delete
+} from '@element-plus/icons-vue'
 const emit = defineEmits(['click'])
 
 const items = [
@@ -53,3 +61,30 @@ const color = (type) => {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.search-history {
+  font-size: 16px;
+  .el-button {
+    font-size: 16px;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    .item {
+      height: 28px;
+      line-height: 28px;
+      color: #616b7a;
+      padding: 0 18px;
+      background-color: rgba(#f6f7f9, .5);
+      border-radius: 15px;
+      margin-right: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      &:hover {
+        background-color: #f6f7f9;
+      }
+    }
+  }
+}
+</style>

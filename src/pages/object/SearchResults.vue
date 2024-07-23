@@ -1,11 +1,9 @@
 <template>
   <v-container>
-    <v-row justify="center">
-      <v-col :cols="5">
-        <SearchBox @search="onSearch" :type="type" :keywords="keywords" />
-      </v-col>
+    <v-row justify="center" class="mt-3 mb-3">
+      <SearchBox @search="onSearch" :type="type" :keywords="keywords" style="width: 1000px" />
     </v-row>
-    <v-divider />
+    
     <ServicesList />
   </v-container>
 </template>

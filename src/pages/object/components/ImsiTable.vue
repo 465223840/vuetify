@@ -1,59 +1,92 @@
 <template>
-  <v-data-table :items="items" :headers="headers">
-    <template v-slot:item.imsi_id="{ item }">
-      <v-btn color="primary" variant="plain">{{ item.imsi_id }}</v-btn>
-    </template>
-    <template v-slot:item.app_count="{ item }">
-      {{ item.app_count }} / {{ item.applet_count }} / {{ item.web_count }}
-    </template>
-    <template v-slot:item.illegal_app_count="{ item }">
-      {{ item.illegal_app_count }} / {{ item.illegal_web_count }}
-    </template>
-    <template v-slot:item.tags="{ item }">
-      <v-chip color="primary" size="small" v-for="tag in item.tags">
-        {{ tag }}
-      </v-chip>
-    </template>
-    <template v-slot:item.discovery_time="{ item }">
-      <div>最早：{{ item.discovery_time[0] }}</div>
-      <div>最晚：{{ item.discovery_time[1] }}</div>
-    </template>
-    <template v-slot:item.action="{ item }">
-      <v-tooltip text="详情">
-        <template #activator="{ props }">
-          <v-btn v-bind="props" icon="mdi-information-outline" color="primary" variant="plain" size="small" />
-        </template>
-      </v-tooltip>
-      <v-tooltip text="收藏">
-        <template #activator="{ props }">
-          <v-btn v-bind="props" icon="mdi-information-outline" color="primary" variant="plain" size="small" />
-        </template>
-      </v-tooltip>
-      <v-tooltip text="刷新">
-        <template #activator="{ props }">
-          <v-btn v-bind="props" icon="mdi-refresh" color="primary" variant="plain" size="small" />
-        </template>
-      </v-tooltip>
-
-    </template>
-  </v-data-table>
+  <el-table :data="items">
+    <el-table-column label="序号" type="index" width="55px"></el-table-column>
+    <el-table-column label="IMSI对象">
+      <template #default="scope">
+        <el-link type="primary">{{ scope.row.imsi_id }}</el-link>
+      </template>
+    </el-table-column>
+    <el-table-column label="手机号" prop="phone_num" width="150px"></el-table-column>
+    <el-table-column label="应用/小程序/网站" width="180px">
+      <template #default="scope">
+        {{ scope.row.app_count }} / {{ scope.row.applet_count }} / {{ scope.row.web_count }}
+      </template>
+    </el-table-column>
+    <el-table-column label="非法应用/网站" width="150px">
+      <template #default="scope">
+        {{ scope.row.illegal_app_count }} / {{ scope.row.illegal_web_count }}
+      </template>
+    </el-table-column>
+    <el-table-column label="业务标签">
+      <template #default="scope">
+        <el-tag
+          class="ml-1"
+          v-for="(tag, i) in scope.row.tags"
+          :key="i">{{ tag }}</el-tag>
+      </template>
+    </el-table-column>
+    <el-table-column label="发现时间">
+      <template #default="scope">
+        最早：{{ scope.row.discovery_time[0] }} <br />
+        最晚：{{ scope.row.discovery_time[1] }}
+      </template>
+    </el-table-column>
+    <el-table-column label="操作">
+      <template #default="scope">
+        <el-tooltip
+          effect="dark"
+          content="详情"
+          placement="top"
+        >
+          <el-button
+            class="btn-icon"
+            type="primary"
+            text
+            :icon="InfoFilled"></el-button>
+        </el-tooltip>
+        <el-tooltip
+          v-if="!scope.row.collect"
+          effect="dark"
+          content="收藏"
+          placement="top"
+        >
+          <el-button
+            class="btn-icon"
+            type="primary"
+            text
+            :icon="Star"></el-button>
+        </el-tooltip>
+        <el-tooltip
+          v-if="scope.row.collect"
+          effect="dark"
+          content="取消收藏"
+          placement="top"
+        >
+          <el-button
+            class="btn-icon"
+            type="primary"
+            text
+            :icon="StarFilled"></el-button>
+        </el-tooltip>
+      </template>
+    </el-table-column>
+  </el-table>
+  <el-pagination layout="prev, pager, next" :total="50" />
 </template>
 
 <script setup>
-const headers = ref([
-  { title: 'IMSI对象', key: 'imsi_id' },
-  { title: '手机号', key: 'phone_num' },
-  { title: '应用/小程序/网站', key: 'app_count' },
-  { title: '非法应用/网站', key: 'illegal_app_count' },
-  { title: '业务标签', key: 'tags' },
-  { title: '发现时间', key: 'discovery_time' },
-  { title: '操 作', key: 'action' }
-])
+import {
+  InfoFilled,
+  Star,
+  StarFilled,
+  Refresh
+} from '@element-plus/icons-vue'
 
 const items = [
   {
     imsi_id: '1781683296486',
     phone_num: '13812341564',
+    collect: true,
     app_count: 24,
     applet_count: 38,
     web_count: 26,
@@ -65,6 +98,7 @@ const items = [
   {
     imsi_id: '178168320000',
     phone_num: '13812341564',
+    collect: false,
     app_count: 24,
     applet_count: 38,
     web_count: 26,
