@@ -18,10 +18,10 @@
           <el-tree
             ref="treeRef"
             :data="treeData"
-            show-checkbox
             node-key="id"
             default-expand-all
             :expand-on-click-node="false"
+            :filter-node-method="filterNode"
           >
             <template #default="{ node, data }">
               <el-row class="custom-tree-node">
