@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full p-4 bg-#F3F5F6">
+  <div class="h-full ">
     <div class="border mb-2 bg-white p-5">
       <LabelExpression :searchText="searchText" :cacheTags="cache_tags" :calcTags="calc_tags" />
     </div>

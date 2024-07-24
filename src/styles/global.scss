@@ -6,35 +6,41 @@
     border: 1px solid $border-color;
     border-bottom: none;
     box-sizing: border-box;
+
     thead {
-        font-size: 16px;
-        color: #4a6376;
+        font-size: 14px;
+        color: #161e24;
+
         th {
             font-weight: normal;
         }
+
         .el-table__cell {
             padding-top: 10px;
             padding-bottom: 10px;
         }
     }
+
     .btn-icon {
         width: 32px;
         font-size: 18px;
         padding: 0;
-        box-shadow: none!important;
-        outline: none!important;
-        + .btn-icon {
+        box-shadow: none !important;
+        outline: none !important;
+
+        +.btn-icon {
             margin-left: 0;
         }
+
         &:hover,
         &.is-text:not(.is-disabled):hover {
             background-color: rgba($primary, .2);
         }
     }
 }
+
 .el-tree {
     .el-dropdown {
         color: #4a6376;
     }
 }
-

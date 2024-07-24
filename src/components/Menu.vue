@@ -46,9 +46,9 @@ const items = [
   { text: '对象', type: 'subheader' },
   { type: 'divider' },
   { text: '画像查询', path: '/object/search', icon: 'mdi-account-search', iconColor: 'purple' },
+  { text: '标签圈人', path: '/object/filter', icon: 'mdi-filter', iconColor: 'blue' },
   { text: '人群圈选', path: '/object/range', icon: 'mdi-account-group', iconColor: 'blue' },
-  { text: '群体分析', path: '/object/analysis', icon: 'mdi-account-settings', iconColor: 'blue' },
-  { text: '标签筛选', path: '/object/filter', icon: 'mdi-filter', iconColor: 'blue' },
+  { text: '群体列表', path: '/object/group', icon: 'mdi-account-settings', iconColor: 'blue' },
 
 
   { text: '模型', type: 'subheader' },

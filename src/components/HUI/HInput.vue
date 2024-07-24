@@ -38,16 +38,17 @@ const updateValue = (e) => {
 
 <style scoped>
 .input-container {
-  /* padding: 2px; */
+  padding: 0 8px;
   display: flex;
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: #F3F5F6;
   font-weight: 500;
 }
 
 .input-container .icon {
+
   margin: 0 6px;
   font-size: 16px;
   color: #555555;
@@ -55,12 +56,11 @@ const updateValue = (e) => {
 }
 
 .input-container input {
-  padding: 6px 0;
   line-height: 12px;
   border: none;
   outline: none;
   flex: 1;
-  /* padding: 0px; */
+  padding: 6px 0;
   font-size: 15px;
 }
 

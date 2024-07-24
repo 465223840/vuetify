@@ -7,7 +7,7 @@
       <!-- <Breadcrumbs /> -->
     </v-app-bar>
     <v-main class="bg-[#f6f7f9]">
-      <router-view v-slot="{ Component, route }">
+      <router-view v-slot="{ Component, route }" class="p-3">
         <v-scroll-x-reverse-transition mode="out-in">
           <component :is="Component" :key="route.fullPath" />
         </v-scroll-x-reverse-transition>

@@ -21,7 +21,7 @@
     </v-menu>
 
     <!-- 分析维度 -->
-    <v-btn density="comfortable" icon="mdi-globe-model" size="small" tile class="mr-4 text-xs">
+    <v-btn density="comfortable" icon="mdi-file-tree-outline" size="small" tile class="mr-4 text-xs">
       <v-icon />
       <v-menu :close-on-content-click="false" activator="parent">
         <LabelTree />

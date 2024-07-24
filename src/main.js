@@ -7,7 +7,6 @@
 // Plugins
 import { registerPlugins } from "@/plugins";
 import "./styles/tailwind.css";
-import "./styles/el.scss";
 // Components
 import App from "./App.vue";
 import "./styles/element-variables.scss";

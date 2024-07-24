@@ -17,6 +17,13 @@
         </v-card>
       </v-menu>
 
+      <v-btn density="comfortable" icon="mdi-file-tree-outline" size="small" tile class="mr-4 text-xs">
+        <v-icon />
+        <v-menu :close-on-content-click="false" activator="parent">
+          <LabelTree />
+        </v-menu>
+      </v-btn>
+
       <div class="flex gap-2 w-screen" ref="el1">
         <h-tag v-for="item in list1" :key="item.id" clearable @remove="onRemoveTag(item.id)">
           {{ item.label }}
