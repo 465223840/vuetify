@@ -3,44 +3,7 @@
     <el-row :gutter="20">
       <el-col :span="5">
         <el-card>
-          <el-input
-            class="mb-2.5"
-            v-model="filterText"
-            placeholder="请输入搜索内容"
-          />
-          <!-- <el-tree
-            ref="treeRef"
-            :data="data"
-            :props="defaultProps"
-            default-expand-all
-            :filter-node-method="filterNode"
-          /> -->
-          <el-tree
-            ref="treeRef"
-            :data="treeData"
-            node-key="id"
-            default-expand-all
-            :expand-on-click-node="false"
-            :filter-node-method="filterNode"
-          >
-            <template #default="{ node, data }">
-              <el-row class="custom-tree-node">
-                <span>{{ node.label }}</span>
-                <span>
-                  <a @click="append(data)"><el-icon><Plus /></el-icon></a>
-                  <el-dropdown>
-                    <a class="ml-2"><el-icon><MoreFilled /></el-icon></a>
-                    <template #dropdown>
-                      <el-dropdown-menu>
-                        <el-dropdown-item @click="rename(node, data)">重命名</el-dropdown-item>
-                        <el-dropdown-item @click="remove(node, data)">删除</el-dropdown-item>
-                      </el-dropdown-menu>
-                    </template>
-                  </el-dropdown>
-                </span>
-              </el-row>
-            </template>
-          </el-tree>
+          <LabelType />
         </el-card>
       </el-col>
       <el-col :span="19">
@@ -48,7 +11,7 @@
           <el-row justify="space-between">
             <span>工作状态</span>
             <div>
-              <el-button type="primary" @click="addLabelDrawer = true">新建标签</el-button>
+              <el-button type="primary" @click="add(scope.row)">新建标签</el-button>
               <el-button type="primary" plain>导入标签</el-button>
               <el-button type="primary" plain>导出标签</el-button>
             </div>
@@ -123,7 +86,7 @@
             <el-table-column label="覆盖率" prop="coverage_rate"></el-table-column>
             <el-table-column label="创建者" prop="creator"></el-table-column>
             <el-table-column label="创建时间" prop="created_date"></el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作" width="160px">
               <template #default="scope">
                 <el-tooltip
                   effect="dark"
@@ -133,7 +96,8 @@
                   <el-button
                     class="btn-icon"
                     type="primary"
-                    text>
+                    text
+                    @click="detail(scope.row)">
                     <el-icon><InfoFilled /></el-icon>
                   </el-button>
                 </el-tooltip>
@@ -145,7 +109,8 @@
                   <el-button
                     class="btn-icon"
                     type="primary"
-                    text>
+                    text
+                    @click="edit(scope.row)">
                     <el-icon><Edit /></el-icon>
                   </el-button>
                 </el-tooltip>
@@ -199,7 +164,7 @@
     <!-- 新建标签 -->
     <el-drawer
       v-model="addLabelDrawer"
-      title="新建标签"
+      :title="addLabelTitle + '标签'"
       direction="rtl"
       size="800px"
     >
@@ -211,162 +176,33 @@
         </div>
       </template>
     </el-drawer>
+    <!-- 标签详情 -->
+    <el-drawer
+      v-model="labelDetailDrawer"
+      :title="labelDetailTitle"
+      direction="rtl"
+      size="1000px"
+    >
+      <LabelDetail />
+      <template #footer>
+        <div style="flex: auto">
+          <el-button size="large">取消</el-button>
+          <el-button size="large" type="primary">新建</el-button>
+        </div>
+      </template>
+    </el-drawer>
   </div>
 </template>
 
 <script setup>
+import LabelType from '../components/LabelType.vue';
 import AddLabel from '../components/AddLabel.vue';
+import LabelDetail from '../components/LabelDetail.vue';
 
 const addLabelDrawer = ref(false)
-
-const selectWidth = 120
-
-const filterText = ref('')
-const treeRef = ref()
-
-let id = 1000
-
-const defaultProps = {
-  children: 'children',
-  label: 'label',
-}
-
-watch(filterText, (val) => {
-  treeRef.value.filter(val)
-})
-
-const filterNode = (value, data) => {
-  if (!value) return true
-  return data.label.includes(value)
-}
-
-const append = (data) => {
-  ElMessageBox.prompt('请输入分类名称', '添加分类', {
-    confirmButtonText: '新建',
-    cancelButtonText: '取消',
-  })
-    .then(({ value }) => {
-      if (!!value.trim()) {
-        const newChild = { id: id++, label: value, children: [] }
-        if (!data.children) {
-          data.children = []
-        }
-        data.children.push(newChild)
-        treeData.value = [...treeData.value]
-        ElMessage({
-          type: 'success',
-          message: '添加成功！',
-        })
-      }
-    })
-    .catch(() => {
-      // cancel
-    })
-}
-
-const rename = (node, data) => {
-  ElMessageBox.prompt('请输入新的分类名称', '编辑分类', {
-    confirmButtonText: '确认',
-    cancelButtonText: '取消',
-    inputValue: data.label
-  })
-    .then(({ value }) => {
-      if (!!value.trim()) {
-        const parent = node.parent
-        const children = parent.data.children || parent.data
-        const index = children.findIndex((d) => d.id === data.id)
-        children.splice(index, 1, {...data, label: value})
-        treeData.value = [...treeData.value]
-        ElMessage({
-          type: 'success',
-          message: '修改成功！',
-        })
-      }
-    })
-    .catch(() => {
-      // cancel
-    })
-}
-
-const remove = (node, data) => {
-  console.log('remove')
-  console.log(node)
-  console.log(data)
-  ElMessageBox.confirm(
-    '是否删除？',
-    '删除提示',
-    {
-      confirmButtonText: '继续',
-      cancelButtonText: '取消',
-      type: 'warning',
-    }
-  )
-    .then(() => {
-      const parent = node.parent
-      const children = parent.data.children || parent.data
-      const index = children.findIndex((d) => d.id === data.id)
-      children.splice(index, 1)
-      treeData.value = [...treeData.value]
-      ElMessage({
-        type: 'success',
-        message: '删除成功！',
-      })
-    })
-    .catch(() => {
-      // cancel
-    })
-}
-
-const treeData= ref([
-  {
-    id: 1,
-    label: 'Level one 1',
-    children: [
-      {
-        id: 4,
-        label: 'Level two 1-1',
-        children: [
-          {
-            id: 9,
-            label: 'Level three 1-1-1',
-          },
-          {
-            id: 10,
-            label: 'Level three 1-1-2',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    label: 'Level one 2',
-    children: [
-      {
-        id: 5,
-        label: 'Level two 2-1',
-      },
-      {
-        id: 6,
-        label: 'Level two 2-2',
-      },
-    ],
-  },
-  {
-    id: 3,
-    label: 'Level one 3',
-    children: [
-      {
-        id: 7,
-        label: 'Level two 3-1',
-      },
-      {
-        id: 8,
-        label: 'Level two 3-2',
-      },
-    ],
-  },
-])
+const addLabelTitle = ref('新建')
+const labelDetailDrawer = ref(false)
+const labelDetailTitle = ref('')
 
 //
 const queryForm = reactive({
@@ -469,15 +305,28 @@ const dataList = [
     created_date: '2024-06-21 13:28:00'
   }
 ]
+
+// 新建
+const add = () => {
+  addLabelDrawer.value = true
+  addLabelTitle.value = '新建'
+}
+
+// 编辑
+const edit = (row) => {
+  addLabelDrawer.value = true
+  addLabelTitle.value = '编辑'
+}
+
+// 详情
+const detail = (row) => {
+  console.log(row)
+  labelDetailDrawer.value = true
+  labelDetailTitle.value = row.name
+}
+
 </script>
 
 <style scoped>
-.custom-tree-node {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 14px;
-  padding-right: 8px;
-}
+
 </style>

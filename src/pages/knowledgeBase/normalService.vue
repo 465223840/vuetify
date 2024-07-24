@@ -44,7 +44,7 @@
     </el-card>
     <div class="m-2.5">
       <el-button type="primary" @click="editDrawer = true">新建</el-button>
-      <el-button type="primary" plain>批量导入</el-button>
+      <el-button type="primary" plain @click="importDrawer = true">批量导入</el-button>
       <el-button type="primary" plain>批量导出</el-button>
       <el-button type="danger" plain>删除</el-button>
     </div>
@@ -76,7 +76,8 @@
               <el-button
                 class="btn-icon"
                 type="primary"
-                text><el-icon><Edit /></el-icon></el-button>
+                text
+                @click="editDrawer = true"><el-icon><Edit /></el-icon></el-button>
             </el-tooltip>
             <el-tooltip
               effect="dark"
@@ -91,7 +92,6 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-link type="primary">测试颜色</el-link>
     </el-card>
     <el-drawer
       v-model="editDrawer"
@@ -101,7 +101,7 @@
     >
       <el-form :model="serviceForm" label-position="top">
         <el-row :gutter="30">
-          <el-col :span="10">
+          <el-col :span="8">
             <el-form-item label="显示名称：">
               <el-input v-model="serviceForm.name"></el-input>
             </el-form-item>
@@ -135,7 +135,7 @@
               <el-input v-model="serviceForm.devCompany" type="textarea"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="14">
+          <el-col :span="16">
             <el-form-item label="关联属性：">
               <el-tag
                 v-for="tag in serviceForm.relatedAttrs"
