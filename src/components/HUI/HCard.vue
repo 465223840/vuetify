@@ -1,13 +1,11 @@
 <template>
   <div class="simple-card">
-    <div class="title">
+    <div class="title" v-if="title">
       <div>{{ title }}</div>
       <div class="btns">
-
         <slot name='btns' />
       </div>
     </div>
-
     <div class="body">
       <slot />
     </div>
@@ -54,7 +52,8 @@ const selectOption = (option) => {
     padding-inline: 24px 12px;
     height: 42px;
     line-height: 42px;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 600;
     background-color: #F3F5F6;
     border-bottom: 1px solid #D4DADE;
   }

@@ -50,7 +50,7 @@ const onRemove = () => {
   max-height: 28px;
   color: #333333;
 
-  padding: 4px 10px;
+  padding: 2px 8px;
   border-radius: 4px;
   cursor: move;
   user-select: none;
