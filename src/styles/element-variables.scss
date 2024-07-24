@@ -1,29 +1,45 @@
+
+@use "./variables.scss" as *;
+
+$--size: (
+    (
+        'large': 54px,
+        'default': 32px,
+        'small': 28px,
+    )
+);
+
+$--table: (
+    (
+        'text-color': #1d2126,
+        'border-color': $border-color,
+        'row-hover-bg-color': rgba($primary, .05),
+        'current-row-bg-color': rgba($primary, .1),
+    )
+);
+
 @forward 'element-plus/theme-chalk/src/common/var.scss' with (
     $colors: (
+        'black': #000033,
         'primary': (
             'base': #406fc9,
+            'placeholder': #616b7a,
         ),
     ),
-    $button-border-width: 3px
-    // $button: (
-    //     'font-weight': getCssVar('font-weight-primary'),
-    //     'border-color': getCssVar('border-color'),
-    //     'bg-color': getCssVar('fill-color', 'blank'),
-    //     'text-color': getCssVar('text-color', 'regular'),
-    //     'disabled-text-color': getCssVar('disabled-text-color'),
-    //     'disabled-bg-color': getCssVar('fill-color', 'blank'),
-    //     'disabled-border-color': getCssVar('border-color-light'),
-    //     'divide-border-color': rgba($color-white, 0.5),
-    //     'hover-text-color': getCssVar('color-primary'),
-    //     'hover-bg-color': getCssVar('color-primary', 'light-9'),
-    //     'hover-border-color': getCssVar('color-primary-light-7'),
-    //     'active-text-color': getCssVar('button-hover-text-color'),
-    //     'active-border-color': getCssVar('color-primary'),
-    //     'active-bg-color': getCssVar('button', 'hover-bg-color'),
-    //     'outline-color': getCssVar('color-primary', 'light-5'),
-    //     'hover-link-text-color': getCssVar('color-info'),
-    //     'active-color': getCssVar('text-color', 'primary'),
-    // )
+    $text-color: (
+        (
+            'regular': #1d2126,
+        )
+    ),
+    // $common-component-size: $--size,
+    $table: $--table,
+    $tree: (
+        (
+            'node-content-height': 32px,
+            'text-color': #4a6376,
+            'expand-icon-color': #b1b1b2
+        )
+    )
 );
 
 // 如果你想导入所有样式:
