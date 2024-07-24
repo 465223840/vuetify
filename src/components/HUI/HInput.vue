@@ -38,6 +38,7 @@ const updateValue = (e) => {
 
 <style scoped>
 .input-container {
+  /* padding: 2px; */
   display: flex;
   align-items: center;
   border: 1px solid #ccc;
@@ -49,10 +50,13 @@ const updateValue = (e) => {
 .input-container .icon {
   margin: 0 6px;
   font-size: 16px;
-  color: #888;
+  color: #555555;
+  font-weight: bold;
 }
 
 .input-container input {
+  padding: 6px 0;
+  line-height: 12px;
   border: none;
   outline: none;
   flex: 1;

@@ -5,43 +5,60 @@
     </div>
     <div class="flex justify-between">
       <UserCount :count="200" />
-      <Operation class="float-right" v-model:toggle="toggle" />
+      <Operation class="float-right" v-model:toggle="toggle" :headers="tableHeaders" />
     </div>
     <template v-if="toggle == -1">
-      无数据站位
+      <img :src="Empty" class="w-48 mx-auto mt-40" alt="占位符">
     </template>
     <template v-else-if="toggle == 0">
       <AnalyseResult :list="list" />
     </template>
     <template v-else-if="toggle == 1">
-      <ImsiTable />
+      <ImsiTable :headers="tableHeaders" />
     </template>
   </div>
 </template>
 
 <script setup>
+import Empty from '@/assets/images/占位符.png'
 import LabelExpression from './components/Filter/LabelExpression/index.vue'
 
-import UserCount from './components/Filter/UserCount'
-import Operation from './components/Filter/Operation';
+import UserCount from './components/Filter/UserCount.vue'
+import Operation from './components/Filter/Operation.vue';
 
 import AnalyseResult from './components/Filter/Analyse/AnalyseResult.vue'
 
-import ImsiTable from './components/ImsiTable.vue'
+import ImsiTable from './components/Filter/ImsiTable.vue'
 
-
-const toggle = ref(0)
+const toggle = ref(-1)
 
 const searchText = ref('')
-const cache_tags = ref([
-  { name: '女士', count: 100 },
-  { name: '学生', count: 200 },
-])
-const calc_tags = ref([
-  { name: '女士', count: 100 },
-  { name: '学生', count: 200 },
-])
 
+const cache_tags = ref([])
+const calc_tags = ref([])
+
+const tableHeaders = [
+  {
+    title: 'IMSI对象',
+    key: 'name',
+  },
+  {
+    title: '手机号',
+    key: 'cores',
+  },
+  {
+    title: '业务标签',
+    key: 'threads',
+  },
+  {
+    title: '最早发现时间',
+    key: 'baseClock',
+  },
+  {
+    title: '最晚发现时间',
+    key: 'boostClock',
+  }
+]
 
 const list = [
   {

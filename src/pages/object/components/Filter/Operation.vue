@@ -29,33 +29,21 @@
     </v-btn>
 
 
-    <!--  -->
     <v-btn density="comfortable" icon="mdi-play-circle-outline" size="small" tile />
     <v-btn density="comfortable" icon="mdi-file-export" size="small" tile class="mr-4" />
-    <div class="border shadow-md">
-      <v-btn density="comfortable" icon="mdi-tray-arrow-down" size="small" tile flat />
-      <v-menu :close-on-content-click="false">
-        <template v-slot:activator="{ props }">
-          <v-btn density="comfortable" icon="mdi-arrow-down-drop-circle" size="small" class="" tile flat
-            v-bind="props" />
-        </template>
 
+    <div class="border shadow-md">
+      <v-btn density="comfortable" icon="mdi-tray-arrow-down" size="small" tile flat class="px-10 border-r-2" />
+      <v-menu :close-on-content-click="false">
+        <template #activator="{ props }">
+          <v-btn density="comfortable" icon="mdi-arrow-down-drop-circle" size="small" tile flat v-bind="props" />
+        </template>
         <v-card max-width="400">
           <v-card-text>
-            <h2 class="text-h6 mb-2">选择需要导出的列</h2>
-
-            <v-chip-group v-model="neighborhoods" column multiple>
-              <v-chip text="1" variant="outlined" filter></v-chip>
-
-              <v-chip text="Honeylane Circle" variant="outlined" filter></v-chip>
-
-              <v-chip text="Donna Drive" variant="outlined" filter></v-chip>
-
-              <v-chip text="Elaine Street" variant="outlined" filter></v-chip>
-
-              <v-chip text="Court Street" variant="outlined" filter></v-chip>
-
-              <v-chip text="Kennedy Park" variant="outlined" filter></v-chip>
+            <h5 class="text-h6 mb-2">选择需要导出的列</h5>
+            <v-chip-group v-model="neighborhoods" column multiple color="primary">
+              <v-chip v-for="header in headers" :key="header.key" :text="header.title" density="compact"
+                variant="outlined" filter />
             </v-chip-group>
           </v-card-text>
         </v-card>
@@ -77,7 +65,7 @@
 <script setup>
 // const toggle = ref(0)
 
-const props = defineProps(['toggle'])
+const props = defineProps(['toggle', 'headers'])
 
 const emit = defineEmits(['update:toggle'])
 // watch(toggle, (val) => {
@@ -85,7 +73,7 @@ const emit = defineEmits(['update:toggle'])
 // })
 const toggle = computed(() => props.toggle)
 
-const neighborhoods = ref([])
+const neighborhoods = ref([0, 1])
 
 </script>
 

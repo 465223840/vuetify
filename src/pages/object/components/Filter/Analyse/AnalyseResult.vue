@@ -13,7 +13,6 @@
   </v-row>
   <v-row>
     <v-col v-for="item in show_list" :key="item" cols="4" sm="12" lg="4" xl="3" xxl="2">
-
       <h-card :title="item.title" class="transition-all duration-300 ease-in-out hover:shadow-xl">
         <template #btns>
           <h-select :options="options" v-model:value="item.type" icon="mdi-history" />
@@ -57,7 +56,7 @@ const minimizeItem = (item) => {
 }
 const restoreItem = (item) => {
   hidden_list.value = hidden_list.value.filter(i => i.id !== item.id);
-  show_list.value.push(item);
+  show_list.value.unshift(item);
 }
 
 const closeItem = (item) => {
