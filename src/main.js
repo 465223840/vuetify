@@ -13,13 +13,16 @@ import "./styles/element-variables.scss";
 import ElementPlus from 'element-plus';
 import "./styles/main.scss";
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+import locale from 'element-plus/dist/locale/zh-cn';
 
 // Composables
 import { createApp } from "vue";
 
 const app = createApp(App);
 
-app.use(ElementPlus)
+app.use(ElementPlus, {
+  locale
+})
 // 全局注册所有图标
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
