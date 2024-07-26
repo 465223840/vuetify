@@ -1,5 +1,9 @@
 // global.css
 
+div {
+    font-size: 14px;
+}
+
 // 自定义样式 重置el
 .el-table {
     width: calc(100% - 2px);
@@ -22,20 +26,7 @@
     }
 
     .btn-icon {
-        width: 32px;
         font-size: 18px;
-        padding: 0;
-        box-shadow: none !important;
-        outline: none !important;
-
-        +.btn-icon {
-            margin-left: 0;
-        }
-
-        &:hover,
-        &.is-text:not(.is-disabled):hover {
-            background-color: rgba($primary, .2);
-        }
     }
 }
 
@@ -43,4 +34,88 @@
     .el-dropdown {
         color: #4a6376;
     }
+}
+
+.el-card {
+    display: flex;
+    flex-direction: column;
+    .el-card__header {
+        display: flex;
+        align-items: center;
+        color: $main;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: #f6f7f9;
+        .right {
+            margin-left: auto;
+        }
+    }
+    .el-card {
+        box-shadow: none;
+    }
+    .el-card__body {
+        flex: 1;
+        height: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        overflow-y: auto;
+    }
+}
+
+.el-tabs {
+    .el-tabs__header {
+        margin-bottom: 10px;
+    }
+    &.header-button-group {
+        .el-tabs__header {
+            border-bottom: none;
+            .el-tabs__nav {
+                border: none;
+            }
+            .el-tabs__item {
+                color: $primary;
+                font-size: 16px;
+                padding: 10px 15px!important;
+                background-color: #ecf0f9;
+                border: 1px solid $border-color;
+                margin-right: -1px;
+                &:focus-visible {
+                    box-shadow: none;
+                }
+                &.is-active {
+                    color: #fff;
+                    background-color: $primary;
+                }
+                &:first-child {
+                    border-radius: $radius-base 0 0 $radius-base;
+                }
+                &:last-child {
+                    border-radius: 0 $radius-base $radius-base 0;
+                }
+            }
+        }
+    }
+}
+
+// button
+.btn-icon {
+    width: 32px;
+    font-size: 18px;
+    padding: 0;
+    box-shadow: none !important;
+    outline: none !important;
+
+    +.btn-icon {
+        margin-left: 0;
+    }
+
+    &:hover,
+    &.is-text:not(.is-disabled):hover {
+        background-color: rgba($primary, .2);
+    }
+}
+
+// el-tag
+.el-tag--light {
+    border-color: transparent;
 }

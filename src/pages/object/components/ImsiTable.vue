@@ -3,7 +3,7 @@
     <el-table-column label="序号" type="index" width="55px"></el-table-column>
     <el-table-column label="IMSI对象">
       <template #default="scope">
-        <el-link type="primary">{{ scope.row.imsi_id }}</el-link>
+        <el-link type="primary" @click="openProfile(scope.row)">{{ scope.row.imsi_id }}</el-link>
       </template>
     </el-table-column>
     <el-table-column label="手机号" prop="phone_num" width="150px"></el-table-column>
@@ -100,6 +100,13 @@ const items = [
     discovery_time: ['2024-04-21  08:50:08', '2024-06-21  08:50:08']
   }
 ]
+
+const openProfile = () => {
+  setTimeout(() => {
+    router.push(`/object/SearchResults?type=${type}&keywords=${keywords}`)
+    loading.value = false
+  }, 200);
+}
 </script>
 
 <style lang="scss" scoped></style>

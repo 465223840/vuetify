@@ -18,12 +18,28 @@ $--table: (
     )
 );
 
+$--card: (
+    (
+        'border-color': $border-color,
+        'padding': 15px,
+    )
+);
+
+$--tag-height: (
+    (
+        'small': 18px,
+    )
+);
+
 @forward 'element-plus/theme-chalk/src/common/var.scss' with (
     $colors: (
-        'black': #000033,
+        'black': $main,
         'primary': (
             'base': #406fc9,
             'placeholder': #616b7a,
+        ),
+        'danger': (
+            'base': #aa2c30,
         ),
     ),
     $text-color: (
@@ -39,7 +55,9 @@ $--table: (
             'text-color': #4a6376,
             'expand-icon-color': #b1b1b2
         )
-    )
+    ),
+    $card: $--card,
+    $tag-height: $--tag-height,
 );
 
 // 如果你想导入所有样式:
