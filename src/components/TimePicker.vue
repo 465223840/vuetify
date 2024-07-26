@@ -2,7 +2,7 @@
   <!-- //如果需要选择完数值后自动关闭日期框 需要将close-on-content-click 设置为true -->
   <!-- <v-locale-provider> -->
   <v-menu :close-on-content-click="false" location="bottom">
-    <template v-slot:activator="{ props }">
+    <template #activator="{ props }">
       <v-text-field v-model="formatDate" v-bind="props" readonly variant="outlined"
         append-inner-icon="mdi-calendar-month-outline" :label="label" hide-details single-line color="primary" />
     </template>

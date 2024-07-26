@@ -1,7 +1,7 @@
 <template>
   <v-data-table :headers="headers" :items="items" show-select item-value="name" density="comfortable"
     :header-props="{ color: 'red' }">
-    <template v-slot:[`column.header`]="{ header }">
+    <template #[`column.header`]="{ header }">
       <th class="custom-header">
         {{ header.text }}
       </th>

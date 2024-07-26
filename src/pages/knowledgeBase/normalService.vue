@@ -6,35 +6,17 @@
           <el-input v-model="queryForm.keyword"></el-input>
         </el-form-item>
         <el-form-item label="类型：">
-          <el-select
-            v-model="queryForm.type"
-            style="width: 120px"
-            placeholder="请选择">
-            <el-option
-              v-for="opt in typeOpts"
-              :key="opt.value"
-              :label="opt.label"
-              :value="opt.value"></el-option>
+          <el-select v-model="queryForm.type" style="width: 120px" placeholder="请选择">
+            <el-option v-for="opt in typeOpts" :key="opt.value" :label="opt.label" :value="opt.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="关联属性：">
-          <el-cascader
-            v-model="queryForm.relatedAttrs"
-            :options="relatedAttrsOpts"
-            :show-all-levels="false"
-            :props="relatedAttrsProps"
-            filterable
-            placeholder="请选择"
-            style="width: 220px" />
+          <el-cascader v-model="queryForm.relatedAttrs" :options="relatedAttrsOpts" :show-all-levels="false"
+            :props="relatedAttrsProps" filterable placeholder="请选择" style="width: 220px" />
         </el-form-item>
         <el-form-item label="建立时间：">
-          <el-date-picker
-            v-model="queryForm.createdTime"
-            type="daterange"
-            start-placeholder="开始时间"
-            end-placeholder="结束时间"
-            style="width: 260px"
-          />
+          <el-date-picker v-model="queryForm.createdTime" type="daterange" start-placeholder="开始时间"
+            end-placeholder="结束时间" style="width: 260px" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onQuery">查询</el-button>
@@ -58,47 +40,27 @@
         <el-table-column label="开发厂商" prop="devCompany"></el-table-column>
         <el-table-column label="关联属性">
           <template #default="scope">
-            <el-tag
-              v-for="tag in scope.row.relatedAttrs"
-              :key="tag"
-              type="primary"
-              >{{ tag }}</el-tag>
+            <el-tag v-for="tag in scope.row.relatedAttrs" :key="tag" type="primary">{{ tag }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column label="建立时间" prop="devCompany"></el-table-column>
         <el-table-column label="操作">
           <template #default="scope">
-            <el-tooltip
-              effect="dark"
-              content="编辑"
-              placement="top"
-            >
-              <el-button
-                class="btn-icon"
-                type="primary"
-                text
-                @click="editDrawer = true"><el-icon><Edit /></el-icon></el-button>
+            <el-tooltip effect="dark" content="编辑" placement="top">
+              <el-button class="btn-icon" type="primary" text @click="editDrawer = true"><el-icon>
+                  <Edit />
+                </el-icon></el-button>
             </el-tooltip>
-            <el-tooltip
-              effect="dark"
-              content="删除"
-              placement="top"
-            >
-              <el-button
-                class="btn-icon"
-                type="primary"
-                text><el-icon><Delete /></el-icon></el-button>
+            <el-tooltip effect="dark" content="删除" placement="top">
+              <el-button class="btn-icon" type="primary" text><el-icon>
+                  <Delete />
+                </el-icon></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
-    <el-drawer
-      v-model="editDrawer"
-      title="编辑网络服务"
-      direction="rtl"
-      size="50%"
-    >
+    <el-drawer v-model="editDrawer" title="编辑网络服务" direction="rtl" size="50%">
       <el-form :model="serviceForm" label-position="top">
         <el-row :gutter="30">
           <el-col :span="8">
@@ -122,13 +84,11 @@
               <el-input v-model="serviceForm.devCompany"></el-input>
             </el-form-item>
             <el-form-item label="图标：">
-              <el-upload
-                class="app-uploader"
-                action="###"
-                :show-file-list="false"
-              >
+              <el-upload class="app-uploader" action="###" :show-file-list="false">
                 <img v-if="serviceForm.imageUrl" :src="imageUrl" class="avatar" />
-                <el-icon v-else class="app-uploader-icon"><Plus /></el-icon>
+                <el-icon v-else class="app-uploader-icon">
+                  <Plus />
+                </el-icon>
               </el-upload>
             </el-form-item>
             <el-form-item label="描述：">
@@ -137,21 +97,11 @@
           </el-col>
           <el-col :span="16">
             <el-form-item label="关联属性：">
-              <el-tag
-                v-for="tag in serviceForm.relatedAttrs"
-                :key="tag"
-                type="primary"
-                >{{ tag }}</el-tag>
-              <el-input
-                class="mb-2.5"
-                v-model="relatedAttrsFilter"
-                :suffix-icon="Search"
+              <el-tag v-for="tag in serviceForm.relatedAttrs" :key="tag" type="primary">{{ tag }}</el-tag>
+              <el-input class="mb-2.5" v-model="relatedAttrsFilter" :suffix-icon="Search"
                 style="width: 100%"></el-input>
-              <el-cascader-panel
-                v-model="serviceForm.relatedAttrs"
-                :props="relatedAttrsProps"
-                style="width: fit-content"
-                :options="relatedAttrsOpts" />
+              <el-cascader-panel v-model="serviceForm.relatedAttrs" :props="relatedAttrsProps"
+                style="width: fit-content" :options="relatedAttrsOpts" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -163,23 +113,14 @@
         </div>
       </template>
     </el-drawer>
-    <el-drawer
-      v-model="importDrawer"
-      title="批量导入"
-      direction="rtl"
-      size="600px"
-    >
+    <el-drawer v-model="importDrawer" title="批量导入" direction="rtl" size="600px">
       <el-form v-model="importForm" label-position="top">
         <el-form-item label="下载模板：">
           <el-button plain>下载模板</el-button>
           <el-link type="primary" class="ml-4">查看导入说明</el-link>
         </el-form-item>
         <el-form-item label="上传文件：">
-          <el-upload
-            drag
-            action="###"
-            :style="{ width: '100%' }"
-          >
+          <el-upload drag action="###" :style="{ width: '100%' }">
             <el-icon class="el-icon--upload"><upload-filled /></el-icon>
             <div class="el-upload__text">
               Drop file here or <em>click to upload</em>
@@ -192,14 +133,8 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="关联属性：">
-          <el-cascader
-            v-model="importForm.relatedAttrs"
-            :options="relatedAttrsOpts"
-            :show-all-levels="false"
-            :props="relatedAttrsProps"
-            filterable
-            placeholder="请选择"
-            :style="{ width: '100%' }" />
+          <el-cascader v-model="importForm.relatedAttrs" :options="relatedAttrsOpts" :show-all-levels="false"
+            :props="relatedAttrsProps" filterable placeholder="请选择" :style="{ width: '100%' }" />
         </el-form-item>
       </el-form>
       <template #footer>

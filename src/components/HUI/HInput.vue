@@ -38,12 +38,14 @@ const updateValue = (e) => {
 
 <style scoped>
 .input-container {
-  padding: 0 8px;
+  padding: 0 4px;
   display: flex;
   align-items: center;
+  /* gap: 5px; */
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #F3F5F6;
+  /* background-color: #F3F5F6; */
+  background-color: #fff;
   font-weight: 500;
 }
 
@@ -56,6 +58,7 @@ const updateValue = (e) => {
 }
 
 .input-container input {
+  margin: 0 8px;
   line-height: 12px;
   border: none;
   outline: none;
