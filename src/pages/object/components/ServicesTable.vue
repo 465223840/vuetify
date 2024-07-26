@@ -3,7 +3,7 @@
     <el-table-column label="序号" type="index" width="55px"></el-table-column>
     <el-table-column label="网站名称" prop="name">
       <template #default="scope">
-        <el-link type="primary">{{ scope.row.name }}</el-link>
+        <el-link type="primary" @click="openProfile(scope.row)">{{ scope.row.name }}</el-link>
       </template>
     </el-table-column>
     <el-table-column label="域名" prop="domain"></el-table-column>
@@ -74,6 +74,8 @@
 </template>
 
 <script setup>
+const router = useRouter()
+
 const items = [
   {
     name: '新竹市家庭教育中心',
@@ -96,6 +98,13 @@ const items = [
     discovery_time: ['2024-04-21  08:50:08', '2024-06-21  08:50:08'],
   }
 ]
+
+const openProfile = (row) => {
+  console.log(row.name)
+  setTimeout(() => {
+    router.push(`/object/profile/123`)
+  }, 200);
+}
 </script>
 
 <style lang="scss" scoped></style>
