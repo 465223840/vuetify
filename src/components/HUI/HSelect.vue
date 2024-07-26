@@ -22,7 +22,6 @@ const props = defineProps(
   {
     options: {
       type: Array,
-      required: true,
       default: []
     },
     value: {
@@ -36,16 +35,10 @@ const props = defineProps(
   }
 )
 const emit = defineEmits(['update:value', 'select'])
-const value = computed(() => props.value)
 const display = computed(() => {
   const val = props.options.find(option => option.value === props.value)?.label || '';
-  // console.log(val)
   return val
 })
-
-// const selected = ref(props.value)
-
-// console.log(props.value)
 
 const isOpen = ref(false);
 

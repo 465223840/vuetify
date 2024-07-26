@@ -4,93 +4,142 @@
       <v-row justify="space-between">
         <v-col cols="6">
           <v-sheet class="pa-2 ma-2">
-            <h-input prefixIcon="mdi-magnify" v-model="search" />
+            <div class="w-full flex items-center gap-2">
+              <h-input prefixIcon="mdi-magnify" v-model="search" class="w-full" />
+              <h-button @click="panel = !panel" type="link">高级</h-button>
+            </div>
           </v-sheet>
         </v-col>
-        <v-col cols="3">
+        <v-col cols="4">
           <v-sheet class="pa-2 ma-2">
-            <!-- <h-input prefixIcon="mdi-magnify" v-model="search" /> -->
-            <el-button type="primary">查 询</el-button>
-            <el-button>重置</el-button>
+            <div class="flex justify-end gap-2">
+              <h-button type="primary" size="large" class="w-36">查 询</h-button>
+              <h-button size="large" class="w-36">重置</h-button>
+            </div>
           </v-sheet>
         </v-col>
       </v-row>
+      <div v-show="panel">
+        <el-form :model="form" label-width="100px">
+          <el-row :gutter="96">
+            <el-col :span="6">
+              <el-form-item label="群体名称">
+                <el-input v-model="form.name" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="群体来源">
+                <el-input v-model="form.email" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="群体类型">
+                <el-input v-model="form.phone" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="96">
+            <el-col :span="6">
+              <el-form-item label="群组标签">
+                <el-input v-model="form.address" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="创建人">
+                <el-input v-model="form.city" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
+      </div>
     </div>
-    <!-- scope.column.label -->
-    <div>
-      <el-table :data="tableData" @selection-change="handleSelectionChange" :row-style="rowStyle">
-        <el-table-column type="selection" width="60" align="center" />
-        <el-table-column :label="header.title" :key="header.key" :width="header.width" v-for="header in headers">
-          <template #default="scope">
-            <div style="display: flex; align-items: center" v-if="header.key === 'actions'">
-              <el-button type="primary" link>详情</el-button>
-              <el-button type="primary" link>编辑</el-button>
-              <el-button type="primary" link>删除</el-button>
-              <el-button type="primary" link>转为公开</el-button>
-              <el-button type="primary" link>加入组合库</el-button>
-            </div>
-            <div style="display: flex; align-items: center" v-else-if="['name1', 'name2'].includes(header.key)">
-              <el-icon v-if="header.key == 'name1'">
-                <timer />
-              </el-icon>
-              <el-button type="primary" link>{{ scope.row[header.key] }}</el-button>
-            </div>
-            <div v-else>
-              <span style="margin-left: 10px">{{ scope.row[header.key] }}</span>
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
+    <div class="mt-4 flex gap-4 items-center">
+      <el-badge :value="tableData2.length">
+        <h-button icon="mdi-cart-outline" @click="drawer2 = true">组合库</h-button>
+      </el-badge>
+      <v-dialog v-model="dialog" max-width="400">
+        <template #activator="{ props: activatorProps }">
+          <h-button icon='mdi-file-export-outline' v-bind="activatorProps">导入文件</h-button>
+        </template>
+        <h-card title="导入文件">
+          <h-input></h-input>
+        </h-card>
+      </v-dialog>
     </div>
+
+    <div class="mt-4">
+      <GroupTable :data="tableData" @operation="operation" />
+    </div>
+
+    <el-drawer v-model="drawer2" title="组合库" direction="rtl" size="600px">
+      <CombinationLib :data="tableData2" @removeItem="removeItem" />
+      <template #footer>
+        <h-button type="primary" class="w-full" size="large">开始分析</h-button>
+      </template>
+    </el-drawer>
   </div>
 </template>
+
 <script setup>
-import { ref } from 'vue'
-const multipleSelection = ref([])
+import GroupTable from './components/Group/GroupTable.vue'
+import CombinationLib from './components/Group/CombinationLib.vue'
+const router = useRouter()
 
 const search = ref('')
-const headers = [
-  {
-    title: '群体名称',
-    align: 'start',
-    key: 'name1',
-    width: 180
-  },
-  {
-    title: '群体来源',
-    align: 'end',
-    key: 'name2',
-    width: 120
-  },
-  {
-    title: '群体类型',
-    align: 'end',
-    key: 'name3',
-    width: 120
-  },
-  {
-    title: '群组标签',
-    align: 'end',
-    key: 'name4',
-  },
-  {
-    title: '创建人',
-    align: 'end',
-    key: 'name5',
-  },
-  {
-    title: '创建时间',
-    align: 'end',
-    key: 'name6',
-  },
-  {
-    title: '操作',
-    align: 'end',
-    width: 340,
-    key: 'actions',
-  },
-]
-const tableData = [
+const dialog = ref(false)
+const panel = ref(false)
+const drawer2 = ref(false)
+
+const operation = (type, row, index) => {
+  switch
+  (type) {
+    case 'name':
+      navigateTo(row)
+    case 'detail':
+      navigateTo(row)
+      break;
+    case 'edit':
+      navigateTo(row)
+      break;
+    case 'remove':
+      console.log(type)
+      break;
+    case 'open':
+      console.log(type)
+      break;
+    case 'copy':
+      copyToTarget(index)
+      break;
+    default:
+      break;
+  }
+}
+
+
+const copyToTarget = (index) => {
+  const itemToCopy = tableData.value[index];
+  const copiedItem = JSON.parse(JSON.stringify(itemToCopy));
+  tableData2.value.push(copiedItem);
+};
+
+const navigateTo = (row) => {
+  router.push(`/object/filter?group=${row.name1}`)
+}
+
+const form = ref({
+  name: '',
+  email: '',
+  phone: '',
+  address: '',
+  city: '',
+  country: '',
+})
+
+
+const removeItem = (index) => tableData2.value.splice(index, 1);
+
+const tableData2 = ref([])
+const tableData = ref([
   {
     name1: '2016-05-03',
     name2: 'Tom',
@@ -111,13 +160,7 @@ const tableData = [
     name2: 'Tom',
     name3: 'No. 189,',
   },
-]
+])
 
-const handleSelectionChange = (val) => {
-  multipleSelection.value = val
-}
 
-const rowStyle = ({ row, rowIndex }) => {
-  console.log(row)
-}
 </script>

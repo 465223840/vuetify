@@ -2,7 +2,7 @@
   <v-navigation-drawer :rail="rail" permanent>
     <v-list>
       <v-list-item prepend-avatar="@/assets/logo.png" title="BFI" @click.stop="rail = false">
-        <template v-slot:append>
+        <template #append>
           <v-btn icon="mdi-chevron-left" variant="text" @click.stop="rail = !rail" />
         </template>
       </v-list-item>
@@ -22,7 +22,7 @@
         </v-list-item>
       </template>
     </v-list>
-    <template v-slot:append>
+    <template #append>
       <div class="bg-red pa-2">
         <v-btn block>
           userinfo

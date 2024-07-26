@@ -1,7 +1,7 @@
 <template>
   <div class="h-full ">
     <div class="border mb-2 bg-white p-5">
-      <LabelExpression :searchText="searchText" :cacheTags="cache_tags" :calcTags="calc_tags" />
+      <LabelExpression :cacheTags="cache_tags" :calcTags="calc_tags" />
     </div>
     <div class="flex justify-between">
       <UserCount :count="200" />
@@ -22,17 +22,12 @@
 <script setup>
 import Empty from '@/assets/images/占位符.png'
 import LabelExpression from './components/Filter/LabelExpression/index.vue'
-
 import UserCount from './components/Filter/UserCount.vue'
 import Operation from './components/Filter/Operation.vue';
-
 import AnalyseResult from './components/Filter/Analyse/AnalyseResult.vue'
-
 import ImsiTable from './components/Filter/ImsiTable.vue'
 
 const toggle = ref(-1)
-
-const searchText = ref('')
 
 const cache_tags = ref([])
 const calc_tags = ref([])
@@ -153,3 +148,9 @@ const list = [
 ]
 
 </script>
+<route lang="json">{
+  "name": "标签圈人",
+  "meta": {
+    "requiresAuth": false
+  }
+}</route>

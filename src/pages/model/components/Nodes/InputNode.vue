@@ -2,7 +2,7 @@
   <v-card class="mx-auto" color="#36393f" max-width="650" min-height="350" theme="dark" variant="flat">
     <v-sheet color="#202225">
       <v-card-item>
-        <template v-slot:prepend>
+        <template #prepend>
           <v-card-title>
             <v-icon icon="mdi-calendar" start></v-icon>
 
@@ -16,7 +16,7 @@
           Create Event
         </v-btn>
 
-        <template v-slot:append>
+        <template #append>
           <v-btn icon="$close" size="large" variant="text"></v-btn>
         </template>
       </v-card-item>

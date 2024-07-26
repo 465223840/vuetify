@@ -32,7 +32,7 @@
     <v-list>
       <template v-for="item in categories">
         <v-list-item v-if="!selected.includes(item)" :key="item.text" :disabled="loading" @click="selected.push(item)">
-          <template v-slot:prepend>
+          <template #prepend>
             <v-icon :disabled="loading" :icon="item.icon"></v-icon>
           </template>
 

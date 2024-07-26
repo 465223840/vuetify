@@ -63,7 +63,6 @@ import { Delete } from '@element-plus/icons-vue'
 import UseData from './UseData';
 
 const props = defineProps({
-  searchText: { type: String, default: '' },
   treeData: {
     type: Array, default: () => [
       {
