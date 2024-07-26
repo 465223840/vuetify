@@ -1,27 +1,14 @@
 <template>
   <div class="file-upload">
-    <button
-      :class="['button', type, size]"
-      :disabled="disabled"
-      @click="handleClick"
-    >
-      <template v-if="$slots.icon">
-        <slot name="icon"></slot>
-      </template>
-      <template v-else-if="icon">
-        <v-icon :class="['button-icon', icon]" :icon="icon" />
-      </template>
+    <h-button :type="type" :icon="icon" :size="size" :disabled="disabled" class="w-full" @click="handleClick">
       <span class="button-text">
-        <slot></slot>
+        <template v-if="$slots.default">
+          <slot></slot>
+        </template>
+        <span v-else>文件导入</span>
       </span>
-    </button>
-    <input
-      type="file"
-      ref="fileInput"
-      @change="handleFileChange"
-      class="file-input"
-      :disabled="disabled"
-    />
+    </h-button>
+    <input type="file" ref="fileInput" @change="handleFileChange" class="file-input" :disabled="disabled" />
   </div>
 </template>
 
@@ -32,7 +19,7 @@ const props = defineProps({
   type: {
     type: String,
     default: 'default',
-    validator: value => ['primary', 'default', 'link', 'error'].includes(value),
+    validator: value => ['primary', 'default', 'link', 'error', 'file'].includes(value),
   },
   icon: {
     type: String,
@@ -49,12 +36,12 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['click', 'file-selected']);
+const emit = defineEmits(['change', 'error']);
 const fileInput = ref(null);
+const MAX_FILE_SIZE = 500 * 1024; // 500KB
 
 const handleClick = (event) => {
   if (!props.disabled) {
-    emit('click', event);
     fileInput.value.click(); // 触发文件选择对话框
   }
 };
@@ -62,7 +49,16 @@ const handleClick = (event) => {
 const handleFileChange = (event) => {
   const files = event.target.files;
   if (files.length > 0) {
-    emit('file-selected', files[0]); // 发送选中的文件
+    const file = files[0];
+    const validTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+
+    if (file.size > MAX_FILE_SIZE) {
+      emit('error', '文件大小超过500KB限制'); // 发送错误消息
+    } else if (!validTypes.includes(file.type)) {
+      emit('error', '无效的文件类型,只允许使用xls和xlsx文件'); // 发送错误消息
+    } else {
+      emit('change', files); // 发送选中的文件
+    }
   }
 };
 </script>

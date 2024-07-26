@@ -27,7 +27,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['removeItem', 'action'])
+const emit = defineEmits(['removeItem', 'action', 'update:multipleSelection'])
 
 const multipleSelection = ref([])
 
@@ -37,6 +37,7 @@ const removeItem = (index) => {
 };
 const handleSelectionChange = (val) => {
   multipleSelection.value = val
+  emit('update:multipleSelection', val)
 }
 
 const headers = [
