@@ -27,6 +27,12 @@ import Operation from './components/Filter/Operation.vue';
 import AnalyseResult from './components/Filter/Analyse/AnalyseResult.vue'
 import ImsiTable from './components/Filter/ImsiTable.vue'
 
+const route = useRoute()
+
+onMounted(() => {
+  toggle.value = route.query.toggle || -1
+})
+
 const toggle = ref(-1)
 
 const cache_tags = ref([])

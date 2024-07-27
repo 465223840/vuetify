@@ -19,7 +19,7 @@ const props = defineProps({
   type: {
     type: String,
     default: 'default',
-    validator: value => ['primary', 'default', 'link', 'error'].includes(value),
+    validator: value => ['primary', 'default', 'link', 'error', 'file'].includes(value),
   },
   icon: {
     type: String,
@@ -47,7 +47,7 @@ const handleClick = (event) => {
 
 <style lang="scss" scoped>
 .button {
-  margin-right: 8px;
+  margin-right: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,17 +79,17 @@ const handleClick = (event) => {
 
   // 样式类型
   &.primary {
-    background-color: #3156BD;
+    background-color: #406fc9;
     border-color: #7889CD;
     color: #fff;
 
     &:hover {
-      background-color: darken(#3156BD, 10%);
+      background-color: darken(#406fc9, 10%);
       border-color: darken(#7889CD, 10%);
     }
 
     &:active {
-      background-color: darken(#3156BD, 20%);
+      background-color: darken(#406fc9, 20%);
       border-color: darken(#7889CD, 20%);
     }
   }
@@ -134,6 +134,20 @@ const handleClick = (event) => {
 
     &:active {
       background-color: rgba(255, 0, 0, 0.2);
+    }
+  }
+
+  &.file {
+    background-color: #20743E;
+    border-color: transparent;
+    color: #ffffff;
+
+    &:hover {
+      background-color: rgba(#20743E, 0.8);
+    }
+
+    &:active {
+      background-color: rgba(#20743E, 0.8);
     }
   }
 
