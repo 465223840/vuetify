@@ -1,6 +1,6 @@
 import { useDraggable } from 'vue-draggable-plus'
 
-
+// 搜索框选项
 function filterAndFlattenTreeData(treedata, searchText) {
   const result = [];
 
@@ -34,6 +34,7 @@ function filterAndFlattenTreeData(treedata, searchText) {
 
   return items;
 }
+// 验证表达式
 function isValidExpression(expression) {
   const operators = new Set(['&', '|', '!']);
   const stack = [];
@@ -69,33 +70,39 @@ function isValidExpression(expression) {
 
   return stack.length === 0 && !lastTokenWasOperator;  // 检查是否所有括号都匹配且最后一个不是操作符
 }
+
 export default function ({ treeData }) {
   const el1 = ref()
   const el2 = ref()
   const el3 = ref()
+  const isValid = ref(true)
 
   const searchText = ref('')
   const list1 = ref([
-    { id: '4', label: '4444', display: '4444' }
+    { id: '4', expression: '4444', expression: '4444' }
   ])
   const list2 = ref([
-    { id: 'a', label: 'aaaa', display: 'aaaa' },
-    { id: 'b', label: 'bbbb', display: 'bbbb' },
-    { id: 'c', label: 'cccc', display: 'cccc' },
-    { id: 'd', label: 'dddd', display: 'dddd' }
+    { id: 'a', expression: 'aaaa', label: 'aaaa' },
+    { id: 'b', expression: 'bbbb', label: 'bbbb' },
+    { id: 'c', expression: 'cccc', label: 'cccc' },
+    { id: 'd', expression: 'dddd', label: 'dddd' }
   ])
 
   watch(() => list2.value, () => {
-    const expression = list2.value.map(item => item.label)
-    const isValid = isValidExpression(expression);
-    console.log(isValid);
-  }, { deep: true })
+    if (list2.value.length > 0) {
+      const expression = list2.value.map(item => item.label)
+      isValid.value = isValidExpression(expression);
+      console.log(isValid.value);
+    } else {
+      isValid.value = true;
+    }
+  }, { deep: true, immediate: true });
 
   const list3 = ref([
-    { id: '-1', label: '&', display: '&', color: 'blue', type: 3 },
-    { id: '-2', label: '|', display: '|', color: 'green', type: 3 },
-    { id: '-3', label: '!', display: '!', color: 'red', type: 3 },
-    { id: '-4', label: '()', display: '()', color: 'black', type: 3 },
+    { id: '-1', expression: '&', label: '&', color: 'primary', type: 3 },
+    { id: '-2', expression: '|', label: '|', color: 'success', type: 3 },
+    { id: '-3', expression: '!', label: '!', color: 'error', type: 3 },
+    { id: '-4', expression: '()', label: '()', color: 'info', type: 3 },
   ])
 
   const items = computed(() => filterAndFlattenTreeData(treeData, searchText.value))
@@ -103,7 +110,6 @@ export default function ({ treeData }) {
   const onClickSelect = (item) => {
     searchText.value = ''
     list1.value.push(item.id)
-    console.log(item)
   }
   // 清空
   const onClearTags = () => list2.value = []
@@ -147,6 +153,17 @@ export default function ({ treeData }) {
     }
   }
 
+  const createTag = (id, label, expression, color, type, timestamp) => {
+    return {
+      id,
+      label,
+      expression,
+      color,
+      type,
+      timestamp
+    }
+  }
+
   useDraggable(el1, list1, {
     animation: 250,
     ghostClass: 'ghost',
@@ -170,8 +187,8 @@ export default function ({ treeData }) {
         const timestamp = Date.now()
         if (event.data.id === '-4') {
           list2.value.splice(event.newIndex, 1)
-          list2.value.splice(event.newIndex, 0, { id: '(', label: '(', type: 3, timestamp })
-          list2.value.splice(event.newIndex + 1, 0, { id: ')', label: ')', type: 3, timestamp })
+          list2.value.splice(event.newIndex, 0, createTag('-4', '(', 'info', 3, timestamp))
+          list2.value.splice(event.newIndex + 1, 0, createTag('-5', ')', 'info', 3, timestamp))
         } else {
           list2.value.splice(event.newIndex, 1)
           list2.value.splice(event.newIndex, 0, { ...event.data, timestamp })
@@ -191,7 +208,7 @@ export default function ({ treeData }) {
     el1,
     el2,
     el3,
-    searchText, items, list1, list2, list3,
+    searchText, items, list1, list2, list3, isValid,
     onClickSelect, onClearTags, onQuickGenerate, onRemoveTag, handleRightClick
   }
 }

@@ -13,6 +13,7 @@
 </template>
 
 <script setup>
+
 import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
@@ -46,6 +47,8 @@ const handleClick = (event) => {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/variables.scss';
+
 .button {
   margin-right: 4px;
   display: flex;
@@ -79,12 +82,12 @@ const handleClick = (event) => {
 
   // 样式类型
   &.primary {
-    background-color: #406fc9;
+    background-color: $primary;
     border-color: #7889CD;
     color: #fff;
 
     &:hover {
-      background-color: darken(#406fc9, 10%);
+      background-color: darken($primary, 10%);
       border-color: darken(#7889CD, 10%);
     }
 

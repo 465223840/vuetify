@@ -15,11 +15,11 @@
           <v-btn density="compact" size="small">前三天</v-btn>
           <v-btn density="compact" size="small">前一周</v-btn>
           <v-btn density="compact" size="small">自定义</v-btn>
+
           date
         </v-btn-toggle>
       </div>
     </v-menu>
-
     <!-- 分析维度 -->
     <v-btn density="comfortable" icon="mdi-file-tree-outline" size="small" tile class="mr-4 text-xs">
       <v-icon />
@@ -28,8 +28,6 @@
       </v-menu>
     </v-btn>
 
-    <!-- 保存 -->
-    <v-btn density="comfortable" icon="mdi-content-save-check-outline" size="small" tile />
     <!-- 开始执行 -->
     <v-btn density="comfortable" icon="mdi-play-circle-outline" size="small" tile />
     <!-- 另存为 -->
@@ -57,8 +55,8 @@
       <v-btn density="comfortable" icon="mdi-poll" size="small" tile :color="toggle == '0' ? 'primary' : ''"
         :active="toggle == '0'" @click="emit('update:toggle', '0')" />
 
-      <v-btn density="comfortable" icon="mdi-poll" size="small" tile :color="toggle == '1' ? 'primary' : ''"
-        :active="toggle == '1'" @click="emit('update:toggle', '1')" />
+      <v-btn density="comfortable" icon="mdi-format-list-bulleted" size="small" tile
+        :color="toggle == '1' ? 'primary' : ''" :active="toggle == '1'" @click="emit('update:toggle', '1')" />
     </div>
 
 

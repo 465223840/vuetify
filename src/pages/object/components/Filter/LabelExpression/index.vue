@@ -1,6 +1,6 @@
 <template>
-  <div class="border bg-[#F5FAFA]" @contextmenu.prevent>
-    <div class="flex gap-2 items-center p-2 border-b-2">
+  <div class="border bg-[#f5f7fa]" @contextmenu.prevent>
+    <div class="flex gap-2  items-center p-2 border-b-2">
       <v-menu>
         <template #activator="{ props }">
           <h-input prefixIcon="mdi-magnify" v-model="searchText" class="min-w-96" v-bind="props" />
@@ -39,7 +39,7 @@
 
     <div class="flex relative p-1">
       <div class="flex gap-2 p-2 border-r-2" ref="el3">
-        <h-tag v-for="item in list3" :key="item.id" :color="item.color">
+        <h-tag v-for="item in list3" :key="item.id" :color="item.color" @dblclick="dbclick">
           {{ item.label }}
         </h-tag>
       </div>
@@ -50,8 +50,9 @@
         </h-tag>
       </div>
 
-      <div class="p-2">
-        <el-button :icon="Delete" @click="onClearTags">清空</el-button>
+      <div class="p-2 flex">
+        <el-button :icon="Delete" @click="onSave" size="small" :disabled="!isValid">保存</el-button>
+        <el-button :icon="Delete" @click="onClearTags" size="small">清空</el-button>
       </div>
     </div>
   </div>
@@ -59,7 +60,6 @@
 
 <script setup>
 import { Delete } from '@element-plus/icons-vue'
-
 import UseData from './UseData';
 
 const props = defineProps({
@@ -75,10 +75,22 @@ const props = defineProps({
   },
 })
 
+
 const {
-  el1, el2, el3, searchText, items, list1, list2, list3,
+  el1, el2, el3, searchText, items, list1, list2, list3, isValid,
   onClickSelect, onClearTags, onQuickGenerate, onRemoveTag, handleRightClick
 } = UseData({ treeData: props.treeData })
+
+
+const dbclick = () => {
+  console.log(123)
+}
+
+const onSave = () => {
+  console.log('save')
+}
+
+
 
 
 

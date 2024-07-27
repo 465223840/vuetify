@@ -65,9 +65,14 @@ export default defineConfig({
     postcss: {
       plugins: [tailwindcss],
     },
+    loaderOptions: {
+      scss: {
+        additionalData: `@import "@/styles/variables.scss";`
+      }
+    }
   },
   build: {
-    outDir: 'filter' // 设置打包后的目录名称为dist
+    outDir: 'dist' // 设置打包后的目录名称为dist
   },
   server: {
     host: true,
