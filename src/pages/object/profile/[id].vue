@@ -3,7 +3,7 @@
     <el-card class="mb-2.5">
       <div class="profile-detail-card mb-2.5">
         <div class="profile-img">
-          <img src="@/assets/images/profile.png" alt="">
+          <img src="@/assets/images/img/profile.png" alt="">
         </div>
         <div class="content">
           <div class="title">
@@ -112,7 +112,9 @@
               </div>
             </el-card>
             <div style="flex: 1; width: 0;">
-              <div style="height: 560px;">地图</div>
+              <div style="height: 560px; overflow: hidden;">
+                <img src="@/assets/images/img/map.jpg" style="height: 100%" alt="">
+              </div>
               <el-card class="mt-2.5" style="height: 220px;">
                 时序图
               </el-card>
@@ -140,11 +142,11 @@
             <el-card style="height: 100%">
               <template #header>
                 <span>常用WiFi分析</span>
-                <div class="right">
+                <div class="right text-base">
                   <el-icon><InfoFilled /></el-icon>
                 </div>
               </template>
-              柱图
+              <BarVerticalChart />
             </el-card>
           </el-col>
         </el-row>
@@ -271,6 +273,7 @@
 import WordCloud from './WordCloud';
 import TimeRangeChart from './TimeRangeChart';
 import PieChart from './PieChart';
+import BarVerticalChart from './BarVerticalChart';
 
 const range = ref('1')
 const rangeDate = ref([])
@@ -609,6 +612,13 @@ const behaviorData = [
       .count {
         color: $primary;
         margin-left: auto;
+      }
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3) {
+        .index {
+          background-color: rgba($primary, .15);
+        }
       }
       & + li {
         border-top: 1px solid $border-color;

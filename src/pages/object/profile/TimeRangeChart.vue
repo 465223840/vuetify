@@ -103,7 +103,6 @@ const initChart = () => {
         if(data && data.length) {
           for (var i = 0; i < data.length; i++) {
             if(name === data[i].name) {
-              console.log(data[i])
               return (
                   '{name|' + name +'}：' +
                   '{value|' + data[i].value +'}个'

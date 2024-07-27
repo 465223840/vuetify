@@ -15,7 +15,7 @@
     <template #default="{ node, data }">
       <el-row class="custom-tree-node">
         <span>{{ node.label }}</span>
-        <span>
+        <span class="custom-handle">
           <a @click="append(data)"><el-icon><Plus /></el-icon></a>
           <el-dropdown>
             <a class="ml-2"><el-icon><MoreFilled /></el-icon></a>
