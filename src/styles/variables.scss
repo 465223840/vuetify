@@ -1,27 +1,34 @@
-
+// colors
 $primary: #406fc9;
+$danger: #f56c6c;
+$success: #67c23a;
+$warning: #d4542f;
+$info: #909399;
+
+// text-color
 $main: #1d2126;
 $regular: #4a6376;
-$danger: #d4542f;
-
+$secondary: #909399;
 $placeholder: #616b7a;
-$disabled-bg: #f6f7f9;
-$disabled-border: #d3d8de;
+
+// border
 $border-color: #d4d8dd;
 
+// disabled
+$disabled: #f6f7f9;
+$disabled-bg: #f6f7f9;
+$disabled-border: #d3d8de;
+
+// radius
+$radius-sm: 2px;
 $radius-base: 4px;
+$radius-md: 8px;
+$radius-lg: 12px;
 
-// text-color 待确认颜色
-// 'primary': #303133 // 主要
-// 'regular': #606266 // 常规
-// 'secondary': #909399 // 辅助
-// 'placeholder': #a8abb2 // 占位
-// 'disabled': #c0c4cc // 禁用
+// font-size
+$font-sm: 12px;
+$font-base: 14px;
+$font-md: 16px;
+$font-lg: 18px;
 
-// 状态色 待确认颜色
-// primary
-// succss
-// warning
-// danger
-// error
-// info
+// menu

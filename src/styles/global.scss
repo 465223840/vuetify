@@ -105,11 +105,10 @@ div {
     box-shadow: none !important;
     outline: none !important;
 
-    +.btn-icon {
+    + .btn-icon {
         margin-left: 0;
     }
 
-    &:hover,
     &.is-text:not(.is-disabled):hover {
         background-color: rgba($primary, .2);
     }
